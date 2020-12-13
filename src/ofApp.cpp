@@ -11,6 +11,8 @@ float red[BALL_NUM];
 float green[BALL_NUM];
 float blue[BALL_NUM];
 bool mouse_pressed;
+float gravity;
+float friction;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -18,8 +20,9 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetCircleResolution(64);
     ofEnableAlphaBlending();
-    
     mouse_pressed = false;
+    gravity = 0.1;
+    friction = 0.999;
     
     for(int i = 0; i < BALL_NUM; i ++) {
         loc_x[i] = ofRandom(0, ofGetWidth());
@@ -43,6 +46,11 @@ void ofApp::update(){
             speed_y[i] = (mouseY - loc_y[i]) / 8.0;
         }
         
+        //update speed
+        speed_x[i] *= friction;
+        speed_y[i] *= friction;
+        speed_y[i] += gravity;
+        
         //update position
         loc_x[i] += speed_x[i];
         loc_y[i] += speed_y[i];
@@ -65,7 +73,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     for(int i = 0; i < BALL_NUM; i ++) {
-        ofSetColor(red[i], green[i], blue[i]);
+        ofSetColor(red[i], green[i], blue[i], 130);
         ofCircle(loc_x[i], loc_y[i], radius[i]);
     }
 }

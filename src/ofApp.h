@@ -1,4 +1,5 @@
 #pragma once
+#define NUM 40
 
 #include "ofMain.h"
 #include "Circle.hpp"
@@ -22,6 +23,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        Circle c1, c2;
+        Circle circles[NUM];
 		
 };

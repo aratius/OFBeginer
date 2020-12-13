@@ -5,22 +5,25 @@ void ofApp::setup(){
     ofBackground(255, 255, 255);
     ofSetCircleResolution(64);
     
-    c1.init(100, 10, 1.0);
-    c2.init(300, 40, 3.5);
+    for(int i = 0; i <  NUM; i++) {
+        circles[i].init(i*10, 5, i/10.0);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    c1.update();
-    c2.update();
+    for(int i = 0; i < NUM; i++) {
+        circles[i].update();
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(0, 0, 0);
     
-    c1.display();
-    c2.display();
+    for(int i = 0; i < NUM; i ++){
+        circles[i].display();
+    }
 }
 
 //--------------------------------------------------------------

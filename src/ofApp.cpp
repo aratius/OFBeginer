@@ -2,37 +2,42 @@
 
 #define BALL_NUM 1000
 
-float x[BALL_NUM];
-float y[BALL_NUM];
-float radius[BALL_NUM];
+float loc_x;
+float loc_y;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    int i;
     ofBackground(0, 0, 0);
-    ofEnableAlphaBlending();
+    ofSetFrameRate(60);
     ofSetCircleResolution(64);
     
-    for(i = 0; i < BALL_NUM; i++) {
-        x[i] = ofRandom(0, ofGetWidth());
-        y[i] = ofRandom(0, ofGetHeight());
-        radius[i] = ofRandom(10, 40);
-    }
+    loc_x = 0;
+    loc_y = 0;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    loc_x += 3;
+    loc_y += 2;
     
+    if(loc_x < 0) {
+        loc_x = ofGetWidth();
+    }
+    if(loc_x > ofGetWidth()) {
+        loc_x = 0;
+    }
+    if(loc_y < 0) {
+        loc_y = ofGetHeight();
+    }
+    if(loc_y > ofGetHeight()) {
+        loc_y = 0;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    int i;
-    ofSetColor(31, 63, 255, 63);
-    
-    for(i = 0; i < BALL_NUM; i++) {
-        ofCircle(x[i], y[i], radius[i]);
-    }
+    ofSetColor(31, 63, 255);
+    ofCircle(loc_x, loc_y, 40);
 }
 
 //--------------------------------------------------------------

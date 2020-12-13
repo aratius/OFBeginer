@@ -27,9 +27,9 @@ void ofApp::setup(){
         speed_x[i] = ofRandom(-5, 5);
         speed_y[i] = ofRandom(-5, 5);
         radius[i] = ofRandom(4, 40);
-        red[i] = ofRandom(0, 255);
-        green[i] = ofRandom(0, 255);
-        blue[i] = ofRandom(0, 255);
+        red[i] = ofRandom(0, 255*i/BALL_NUM);
+        green[i] = ofRandom(0, 255*i/BALL_NUM);
+        blue[i] = ofRandom(0, 255*i/BALL_NUM);
     }
 }
 

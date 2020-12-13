@@ -228,6 +228,15 @@
 			name = local_addons;
 			sourceTree = "<group>";
 		};
+		70818CF8258645AF002BEF9C /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				70818CF525862B70002BEF9C /* Circle.cpp */,
+				70818CF625862B70002BEF9C /* Circle.hpp */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,11 +542,10 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				70818CF8258645AF002BEF9C /* utils */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				70818CF525862B70002BEF9C /* Circle.cpp */,
-				70818CF625862B70002BEF9C /* Circle.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -618,7 +626,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project \"$OF_PATH/libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj\" -target openFrameworks -configuration \"${CONFIGURATION}\"";
+			shellScript = "xcodebuild -project \"$OF_PATH/libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj\" -target openFrameworks -configuration \"${CONFIGURATION}\"\n";
 		};
 		E4B6FFFD0C3F9AB9008CF71C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

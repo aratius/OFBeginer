@@ -16,6 +16,7 @@ float friction;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetBackgroundAuto(false);
     ofBackground(0, 0, 0);
     ofSetFrameRate(60);
     ofSetCircleResolution(64);
@@ -72,6 +73,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetColor(0, 0, 0, 27);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    
     for(int i = 0; i < BALL_NUM; i ++) {
         ofSetColor(red[i], green[i], blue[i], 130);
         ofCircle(loc_x[i], loc_y[i], radius[i]);

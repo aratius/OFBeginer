@@ -15,7 +15,7 @@ class Circle {
     
 public:
     
-    void init(float _y, int _eSize, float _speed);
+    void init(float _x, float _y, int _eSize, float _speed);
     void update();
     void display();
     

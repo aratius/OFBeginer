@@ -7,9 +7,9 @@
 
 #include "Circle.hpp"
 
-void Circle::init (float _y, int _eSize, float _speed) {
+void Circle::init (float _x, float _y, int _eSize, float _speed) {
     
-    xPos = 0.0;
+    xPos = _x;
     yPos = _y;
     eSize = _eSize;
     speed = _speed;
@@ -18,9 +18,9 @@ void Circle::init (float _y, int _eSize, float _speed) {
 
 void Circle::update() {
     
-    xPos += speed;
-    if(xPos > ofGetWidth()) {
-        xPos = 0;
+    yPos += speed;
+    if(yPos > ofGetWidth()) {
+        yPos = 0;
     }
 }
 

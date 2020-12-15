@@ -5,15 +5,16 @@ void ofApp::setup(){
     ofBackground(255, 255, 255);
     ofSetCircleResolution(64);
     
-    for(int i = 0; i <  NUM; i++) {
-        circles[i].init(i*10, 5, i/10.0);
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for(int i = 0; i < NUM; i++) {
+    for(int i = 0; i < circles.size(); i++) {
         circles[i].update();
+        if(circles[i].yPos > ofGetHeight()) {
+            //要素削除
+            circles.erase(circles.begin()+i);
+        }
     }
 }
 
@@ -21,7 +22,7 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(0, 0, 0);
     
-    for(int i = 0; i < NUM; i ++){
+    for(int i = 0; i < circles.size(); i ++){
         circles[i].display();
     }
 }
@@ -48,7 +49,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    
+    Circle circle;
+    circle.init(mouseX, mouseY, 10, 10);
+    circles.push_back(circle);
+    cout<<circles.size()<<endl;
 }
 
 //--------------------------------------------------------------

@@ -25,5 +25,6 @@ void Circle::update() {
 }
 
 void Circle::display() {
+    ofSetColor(0, 0, 0);
     ofDrawCircle(xPos, yPos, eSize);
 }

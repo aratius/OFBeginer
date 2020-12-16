@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		707B42F72588F47B002FF368 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 707B42F52588F47B002FF368 /* Ground.cpp */; };
+		707B42FA2588F86A002FF368 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 707B42F82588F86A002FF368 /* Player.cpp */; };
 		70818CF725862B70002BEF9C /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70818CF525862B70002BEF9C /* Circle.cpp */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
@@ -25,6 +27,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		707B42F52588F47B002FF368 /* Ground.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ground.cpp; sourceTree = "<group>"; };
+		707B42F62588F47B002FF368 /* Ground.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ground.hpp; sourceTree = "<group>"; };
+		707B42F82588F86A002FF368 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		707B42F92588F86A002FF368 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		70818CF525862B70002BEF9C /* Circle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		70818CF625862B70002BEF9C /* Circle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
 		E42962AC2163EDD300A6A9E2 /* ofCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofCamera.cpp; path = ../../../libs/openFrameworks/3d/ofCamera.cpp; sourceTree = SOURCE_ROOT; };
@@ -232,7 +238,11 @@
 			isa = PBXGroup;
 			children = (
 				70818CF525862B70002BEF9C /* Circle.cpp */,
+				707B42F82588F86A002FF368 /* Player.cpp */,
+				707B42F92588F86A002FF368 /* Player.hpp */,
 				70818CF625862B70002BEF9C /* Circle.hpp */,
+				707B42F52588F47B002FF368 /* Ground.cpp */,
+				707B42F62588F47B002FF368 /* Ground.hpp */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -650,7 +660,9 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				70818CF725862B70002BEF9C /* Circle.cpp in Sources */,
+				707B42F72588F47B002FF368 /* Ground.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				707B42FA2588F86A002FF368 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

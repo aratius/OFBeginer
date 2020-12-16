@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "Circle.hpp"
+#include "Ground.hpp"
+#include "Player.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -22,6 +24,10 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+        // my function
+        float getGround_yPos();
+    
         vector <Circle> circles;
-		
+        Ground ground;
+        GamePlayer player;
 };

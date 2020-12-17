@@ -1,8 +1,9 @@
 #include "ofApp.h"
 
-#define Ground_radius 1000.0
-#define Player_size  100
+float Ground_radius = 4000.0;
+float Player_size = 100;
 float mX = -999;  //-1 ~ 1
+int frame_count;
 
 //地面の大きいCircleのY座標を取得
 float ofApp::getGround_yPos(){
@@ -11,7 +12,6 @@ float ofApp::getGround_yPos(){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    float cosA = (pow(ofGetWidth(), 2) - pow(Ground_radius, 2) * 2) / (- 2 * Ground_radius * 2);
     
     ofBackground(255, 255, 255);
     ofSetCircleResolution(64);
@@ -25,14 +25,42 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    player.update();
+    player.update(mX, Ground_radius, getGround_yPos());
     
     for(int i = 0; i < circles.size(); i++) {
-        circles[i].update();
+        circles[i].update(frame_count);
         if(circles[i].yPos > ofGetHeight()) {
             circles.erase(circles.begin()+i);//要素削除
         }
     }
+    
+    checkCollision();
+    
+    if(setTimer(60)) {
+        //60フレームに1度実行される
+        circleInit();
+    };
+    
+    
+    frame_count ++;
+}
+
+//circleとplayerの衝突 衝突したら該当のcircle消す
+void ofApp::checkCollision() {
+    for (int i = 0; i < circles.size(); i++) {
+        float dist = sqrt(pow(circles[i].xPos - player.xPos, 2) + pow(circles[i].yPos - player.yPos, 2));
+        if(dist < Player_size) {
+            player.color_value += 10;
+            circles.erase(circles.begin()+i);//要素削除
+        }
+    }
+}
+
+bool ofApp::setTimer(int doCount) {
+    if(frame_count % doCount == 0) {
+        return true;
+    }
+    return false;
 }
 
 //--------------------------------------------------------------
@@ -46,16 +74,6 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     float mousePositionX = ofGetMouseX();
     float stageWidth = ofGetWidth();
@@ -63,43 +81,10 @@ void ofApp::mouseMoved(int x, int y ){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::circleInit() {
     Circle circle;
-    circle.init(mouseX, mouseY, 10, 10);
+    float x = ofRandom(ofGetWidth());
+    circle.init(x, -100, 15, ofRandom(2) + 2, frame_count);
     circles.push_back(circle);
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-    
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
 }

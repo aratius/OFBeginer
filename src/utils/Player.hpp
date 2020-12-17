@@ -16,10 +16,10 @@ class GamePlayer {
 public:
     
     void init(float _x, float _y, float _size);
-    void update();
+    void update(float mX, float g_r, float g_y);
     void display();
     
-    float xPos, yPos, size;
+    float xPos, yPos, size, color_value;
     
 private:
     

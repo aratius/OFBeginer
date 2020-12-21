@@ -21,11 +21,20 @@ void ofApp::setup(){
     float initAngle = 0;
     float initY = -(cos(initAngle) * Ground_radius + Player_size) + getGround_yPos();
     player.init(ofGetWidth()/2, initY, Player_size);
+    
+    
+    hokuyo.setup();
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    player.update(mX, Ground_radius, getGround_yPos());
+    float hokuyo_x = hokuyo.update();
+    //calc degree
+    //だいたい-1~1の範囲に収める
+    hokuyo_x/=50;
+    
+    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x);
     
     for(int i = 0; i < circles.size(); i++) {
         circles[i].update(frame_count);

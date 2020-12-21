@@ -4,6 +4,10 @@
 #include "Circle.hpp"
 #include "Ground.hpp"
 #include "Player.hpp"
+#include "Hokuyo.hpp"
+
+//addons
+#include "ofxOsc.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,7 +24,9 @@ class ofApp : public ofBaseApp{
         void circleInit();
         void checkCollision();
     
+        //my classes
         vector <Circle> circles;
         Ground ground;
         GamePlayer player;
+        HokuyoOsc hokuyo;
 };

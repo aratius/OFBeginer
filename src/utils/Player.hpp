@@ -16,7 +16,7 @@ class GamePlayer {
 public:
     
     void init(float _x, float _y, float _size);
-    void update(float mX, float g_r, float g_y);
+    void update(float mX, float g_r, float g_y, float hokuyo_x);
     void display();
     
     float xPos, yPos, size, color_value;

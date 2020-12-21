@@ -8,7 +8,7 @@
 #include "Circle.hpp"
 
 #define amplitude 30
-#define frame_devide 0.03 
+#define frame_devide 0.02
 
 void Circle::init (float _x, float _y, int _eSize, float _speed, float frame) {
     

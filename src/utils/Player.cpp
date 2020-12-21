@@ -7,8 +7,7 @@
 
 #include "Player.hpp"
 
-#define PI 3.14159
-#define degree 8
+#define degree 20
 
 void GamePlayer::init(float _x, float _y, float _size) {
     
@@ -18,8 +17,9 @@ void GamePlayer::init(float _x, float _y, float _size) {
     color_value = 0;
 }
 
-void GamePlayer::update(float mX,  float g_r, float g_y) {
-    float angle = mX * PI / degree;
+void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
+    float angle = mX * PI / degree;  //case hokuyo
+//    float angle = mX * PI / degree;  //case mouse
     float x = sin(angle) * g_r + ofGetWidth()/2;
     float y = -(cos(angle) * g_r + size) + g_y;
     xPos = x;

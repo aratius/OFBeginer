@@ -26,6 +26,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
         //期待した値が来なかったら前回の有効値使う
         hokuyo_x = last_active_pos;
     }
+    //だいたい-1~1の値に調整（ここは手動で）
     hokuyo_x /= 50;
 //    cout << hokuyo_x << endl;
     float angle = hokuyo_x * PI / degree;  //case hokuyo

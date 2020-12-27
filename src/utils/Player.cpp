@@ -23,6 +23,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
     if(hokuyo_x > -360 && hokuyo_x < 360) {
         last_active_pos = hokuyo_x;
     }else {
+        //期待した値が来なかったら前回の有効値使う
         hokuyo_x = last_active_pos;
     }
     hokuyo_x /= 50;

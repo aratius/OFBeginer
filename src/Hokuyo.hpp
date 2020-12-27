@@ -23,7 +23,7 @@ public:
     
     //OSCメッセージを受信するインスタンス
     ofxOscReceiver receiver;
-    float hokuyo_x;
+    float hokuyo_x = 0;
     int frame;
     
 };

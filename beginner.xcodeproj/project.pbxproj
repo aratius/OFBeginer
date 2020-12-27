@@ -332,6 +332,7 @@
 		6B6AD5A931E565B62CDF53FA /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				70C61207259171910011AF6E /* shader */,
 				2F1FE16E6EEE52DA7D772967 /* Player.cpp */,
 				6D6EF7A7FAD616C08383793F /* Ground.cpp */,
 				74FFE5F7840B36AFAFDD540E /* Circle.hpp */,
@@ -342,6 +343,13 @@
 				707B4420258DAC30002FF368 /* Hokuyo.hpp */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		70C61207259171910011AF6E /* shader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = shader;
 			sourceTree = "<group>";
 		};
 		86D2677079A3AF4A5A88E29A /* oscpack */ = {

@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-float Ground_radius = 4000.0;
+float Ground_radius = 1000.0;
 float Player_size = 100;
 float mX = -999;  //-1 ~ 1
 int frame_count;
@@ -30,19 +30,16 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     float hokuyo_x = hokuyo.update();
-    //calc degree
-    //だいたい-1~1の範囲に収める
-    hokuyo_x/=50;
-    
     player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x);
     
     for(int i = 0; i < circles.size(); i++) {
-        circles[i].update(frame_count);
+        circles[i].update();
         if(circles[i].yPos > ofGetHeight()) {
             circles.erase(circles.begin()+i);//要素削除
         }
     }
     
+    //cirlcleとplayerの衝突判定
     checkCollision();
     
     if(setTimer(60)) {
@@ -59,7 +56,7 @@ void ofApp::checkCollision() {
     for (int i = 0; i < circles.size(); i++) {
         float dist = sqrt(pow(circles[i].xPos - player.xPos, 2) + pow(circles[i].yPos - player.yPos, 2));
         if(dist < Player_size) {
-            player.color_value += 10;
+            player.color_value += 0.1;
             circles.erase(circles.begin()+i);//要素削除
         }
     }
@@ -75,6 +72,7 @@ bool ofApp::setTimer(int doCount) {
 //--------------------------------------------------------------
 void ofApp::draw(){
     player.display();
+    
     ground.display();
     
     for(int i = 0; i < circles.size(); i ++){

@@ -19,7 +19,10 @@ public:
     void update(float mX, float g_r, float g_y, float hokuyo_x);
     void display();
     
-    float xPos, yPos, size, color_value;
+    float xPos, yPos, size, color_value, last_active_pos;
+    
+    ofShader playerShader;
+    ofImage playerImage;
     
 private:
     

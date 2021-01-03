@@ -8,6 +8,7 @@ int frame_count;
 //地面の大きいCircleのY座標を取得
 float ofApp::getGround_yPos(){
     return Ground_radius + ofGetHeight()*0.7;
+    
 }
 
 //--------------------------------------------------------------

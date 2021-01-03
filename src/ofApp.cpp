@@ -12,6 +12,7 @@ float ofApp::getGround_yPos(){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    sky.init();
     
     ofBackground(255, 255, 255);
     ofSetCircleResolution(64);
@@ -23,13 +24,13 @@ void ofApp::setup(){
     player.init(ofGetWidth()/2, initY, Player_size);
     
     
-    hokuyo.setup();
-    
+    hokuyo.init();
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    sky.update();
     
     
     for(int i = 0; i < circles.size(); i++) {
@@ -44,7 +45,7 @@ void ofApp::update(){
     float hokuyo_x = hokuyo.update();
     player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role, mouseSpeed);
     
-    if(setTimer(60)) {
+    if(setTimer(60) && player.life) {
         //60フレームに1度実行される
         circleInit();
     };
@@ -84,6 +85,7 @@ void ofApp::draw(){
 //    ofSetColor(255, 255, 0);
 //    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
     
+    sky.display();
     
     for(int i = 0; i < circles.size(); i ++){
         circles[i].display();

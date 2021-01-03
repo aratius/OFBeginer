@@ -18,7 +18,7 @@
 class HokuyoOsc {
     
 public:
-    void setup();
+    void init();
     float update();
     
     //OSCメッセージを受信するインスタンス

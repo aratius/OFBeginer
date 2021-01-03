@@ -7,7 +7,7 @@
 
 #include "Hokuyo.hpp"
 
-void HokuyoOsc::setup() {
+void HokuyoOsc::init() {
     
     receiver.setup(PORT);
     frame = 0;

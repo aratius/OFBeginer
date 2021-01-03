@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "Hokuyo.hpp"
 #include "PlayerFoot.hpp"
+#include "Sky.hpp"
 
 //addons
 #include "ofxOsc.h"
@@ -31,6 +32,7 @@ class ofApp : public ofBaseApp{
         Ground ground;
         GamePlayer player;
         HokuyoOsc hokuyo;
+    Sky sky;
     
         //my variable
         float mouseSpeed;

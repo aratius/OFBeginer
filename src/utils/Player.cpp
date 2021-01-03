@@ -7,7 +7,7 @@
 
 #include "Player.hpp"
 
-#define degree 15
+#define degree 10
 
 void GamePlayer::init(float _x, float _y, float _size) {
     
@@ -59,7 +59,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
         if(role == "good") {
             //回復
             u_noiseAmount = 0.;
-            color_value -= 0.2;
+            if(color_value > 0) color_value -= 0.2;
             
             float duration = 2000;
             tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
@@ -107,12 +107,6 @@ void GamePlayer::display() {
     ofPushMatrix();
     ofTranslate(xPos+size/2, yPos+size/2);
     ofRotateZDeg(imgangle + imgangleOffset + mouseOffset);
-    cout<<1;
-    cout<<imgangle<<endl;
-    cout<<2;
-    cout<<imgangleOffset<<endl;
-    cout<<3;
-    cout<<mouseOffset<<endl;
     
     //shader start
     playerShader.begin();

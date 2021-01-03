@@ -15,12 +15,15 @@ class Circle {
     
 public:
     
-    void init(float _x, float _y, int _eSize, float _speed, float frame);
+    void init(float _x, float _y, int _eSize, float _speed, float frame, string filename, string _role);
     void update();
     void display();
     
-    float xPos, yPos, eSize, speed, start_frame, offsetX;
+    float xPos, yPos, eSize, speed, start_frame, offsetX, angleValue, angle;
     float seed[2];
+    string role;  //悪役かどうか
+    
+    ofImage textImage;
     
 private:
     

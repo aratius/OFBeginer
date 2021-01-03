@@ -18,12 +18,13 @@ void GamePlayer::init(float _x, float _y, float _size) {
     imgangle = 0;
     
     playerImage.load("imgs/chara.png");
+    noiseTexture.load("imgs/noise.png");
     playerShader.load("","shaders/player.frag");
     
     foot.init(0, size/2, footSize, size);
 }
 
-void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
+void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role) {
     if(hokuyo_x > -360 && hokuyo_x < 360) {
         last_active_pos = hokuyo_x;
     }else {
@@ -47,8 +48,19 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
     yPos = yForImg;
     
     imgangle = atan2(y, x) / PI * 180 + 90;
-    
     foot.update();
+    
+    //circleが衝突してダメージを受けている状態
+    if(role != "") {
+        if(role == "good") {
+            u_noiseAmount = 0.;
+            color_value -= 0.1;
+        }else if(role=="bad") {
+            u_noiseAmount = 2.;
+            color_value += 0.1;
+        }
+    }
+    u_noiseAmount *= 0.99;
 }
 
 void GamePlayer::display() {
@@ -64,8 +76,9 @@ void GamePlayer::display() {
     //shader start
     playerShader.begin();
     playerImage.draw(-size/2, -size/2, size, size);  //image
-    playerShader.end();
-    //shader end
+    playerShader.setUniformTexture("tex1", noiseTexture, 1);  //テクスチャとして渡す
+    playerShader.setUniform1f("u_noiseAmount", u_noiseAmount);
+    playerShader.setUniform1f("u_color_value", color_value);
     
     //eye
 //    ofSetColor(255, 255, 255);
@@ -74,6 +87,9 @@ void GamePlayer::display() {
     
     //foot
     foot.display();
+    
+    playerShader.end();
+    //shader end
     
 //    reset Matrix
     ofPopMatrix();

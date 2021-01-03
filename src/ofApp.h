@@ -23,7 +23,7 @@ class ofApp : public ofBaseApp{
         float getGround_yPos();
         bool setTimer(int doCount);
         void circleInit();
-        void checkCollision();
+        string checkCollision();
     
         //my classes
         vector <Circle> circles;

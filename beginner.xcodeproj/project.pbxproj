@@ -18,6 +18,7 @@
 		67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */; };
 		7055B5A225A0ADCC00589C27 /* PlayerFoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7055B5A025A0ADCC00589C27 /* PlayerFoot.cpp */; };
 		707B4421258DAC30002FF368 /* Hokuyo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 707B441F258DAC30002FF368 /* Hokuyo.cpp */; };
+		709B0F2525A1A90F00542FD6 /* gamesound.mp3 in Frameworks */ = {isa = PBXBuildFile; fileRef = 709B0F2425A1A90F00542FD6 /* gamesound.mp3 */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
 		879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9BFFBBF4CC43DEE890B3C3E /* OscTypes.cpp */; };
 		8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81967292BFC87A0144BD32C6 /* ofxOscSender.cpp */; };
@@ -61,6 +62,7 @@
 		7055B5A125A0ADCC00589C27 /* PlayerFoot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerFoot.hpp; sourceTree = "<group>"; };
 		707B441F258DAC30002FF368 /* Hokuyo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hokuyo.cpp; sourceTree = "<group>"; };
 		707B4420258DAC30002FF368 /* Hokuyo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hokuyo.hpp; sourceTree = "<group>"; };
+		709B0F2425A1A90F00542FD6 /* gamesound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gamesound.mp3; path = bin/data/se/gamesound.mp3; sourceTree = "<group>"; };
 		74FFE5F7840B36AFAFDD540E /* Circle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Circle.hpp; path = src/utils/Circle.hpp; sourceTree = SOURCE_ROOT; };
 		7689F8A0F3D0B7635A8C3104 /* ofxOscArg.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxOscArg.h; path = ../../../addons/ofxOsc/src/ofxOscArg.h; sourceTree = SOURCE_ROOT; };
 		81967292BFC87A0144BD32C6 /* ofxOscSender.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxOscSender.cpp; path = ../../../addons/ofxOsc/src/ofxOscSender.cpp; sourceTree = SOURCE_ROOT; };
@@ -273,6 +275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709B0F2525A1A90F00542FD6 /* gamesound.mp3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +351,14 @@
 				7055B5A125A0ADCC00589C27 /* PlayerFoot.hpp */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		709B0F2325A1A90F00542FD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				709B0F2425A1A90F00542FD6 /* gamesound.mp3 */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		70C61207259171910011AF6E /* shader */ = {
@@ -693,6 +704,7 @@
 				BB4B014C10F69532006C3DED /* addons */,
 				6948EE371B920CB800B5AC1A /* local_addons */,
 				E4B69B5B0A3A1756003C02F2 /* beginnerDebug.app */,
+				709B0F2325A1A90F00542FD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -759,6 +771,9 @@
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					mp3,
+				);
 				LastUpgradeCheck = 0600;
 			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "beginner" */;
@@ -806,7 +821,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "xcodebuild -project \"$OF_PATH/libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj\" -target openFrameworks -configuration \"${CONFIGURATION}\"";
+			shellScript = "xcodebuild -project \"$OF_PATH/libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj\" -target openFrameworks -configuration \"${CONFIGURATION}\"\n";
 		};
 		E4B6FFFD0C3F9AB9008CF71C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

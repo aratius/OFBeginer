@@ -25,21 +25,11 @@ void ofApp::setup(){
     
     hokuyo.setup();
     
-    ofSoundPlayer music;
-    music.setMultiPlay(true);
-    music.load("se/gamesound.mp3");
-//    gamemusic.setLoop(true);
-    
-    music.play();
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofSoundUpdate();
     
-    float hokuyo_x = hokuyo.update();
-    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x);
     
     for(int i = 0; i < circles.size(); i++) {
         circles[i].update();
@@ -49,7 +39,9 @@ void ofApp::update(){
     }
     
     //cirlcleとplayerの衝突判定
-    checkCollision();
+    string role = checkCollision();
+    float hokuyo_x = hokuyo.update();
+    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role);
     
     if(setTimer(60)) {
         //60フレームに1度実行される
@@ -61,17 +53,20 @@ void ofApp::update(){
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す
-void ofApp::checkCollision() {
+string ofApp::checkCollision() {
+    string role;
     for (int i = 0; i < circles.size(); i++) {
         ofVec2f playerCenter;
         playerCenter.x = player.xPos + player.size/2;
         playerCenter.y = player.yPos + player.size/2;
         float dist = sqrt(pow(circles[i].xPos - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
-        if(dist < Player_size/2 + circles[i].eSize/2) {
-            player.color_value += 0.1;
+        if(dist < Player_size/2 + circles[i].eSize) {
+            role = circles[i].role;
             circles.erase(circles.begin()+i);//要素削除
+            return role;
         }
     }
+    return "";
 }
 
 bool ofApp::setTimer(int doCount) {
@@ -83,6 +78,9 @@ bool ofApp::setTimer(int doCount) {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+//    collition range
+//    ofSetColor(255, 255, 0);
+//    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
     
     ground.display();
     
@@ -105,6 +103,18 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::circleInit() {
     Circle circle;
     float x = ofRandom(ofGetWidth());
-    circle.init(x, -100, 15, ofRandom(2) + 2, frame_count);
-    circles.push_back(circle);
+    
+    if(ofRandom(1.0) > 0.9) {
+        //good
+        int index = ofRandom(10);
+        string filename = "imgs/good/good-" + to_string(index) + ".png";
+        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "good");
+    }else{
+        //bad
+        int index = ofRandom(36);
+        string filename = "imgs/bad/bad-" + to_string(index) + ".png";
+        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "bad");
+    }
+    
+    circles.push_back(circle);  //配列に追加
 }

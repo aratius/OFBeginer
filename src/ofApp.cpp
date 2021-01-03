@@ -1,0 +1,120 @@
+#include "ofApp.h"
+
+float Ground_radius = 1000.0;
+float Player_size = 100;
+float mX = -999;  //-1 ~ 1
+int frame_count;
+
+//地面の大きいCircleのY座標を取得
+float ofApp::getGround_yPos(){
+    return Ground_radius + ofGetHeight()*0.7;
+}
+
+//--------------------------------------------------------------
+void ofApp::setup(){
+    
+    ofBackground(255, 255, 255);
+    ofSetCircleResolution(64);
+    
+    ground.init(Ground_radius, getGround_yPos());
+    
+    float initAngle = 0;
+    float initY = -(cos(initAngle) * Ground_radius + Player_size) + getGround_yPos();
+    player.init(ofGetWidth()/2, initY, Player_size);
+    
+    
+    hokuyo.setup();
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::update(){
+    
+    
+    for(int i = 0; i < circles.size(); i++) {
+        circles[i].update();
+        if(circles[i].yPos > ofGetHeight()) {
+            circles.erase(circles.begin()+i);//要素削除
+        }
+    }
+    
+    //cirlcleとplayerの衝突判定
+    string role = checkCollision();
+    float hokuyo_x = hokuyo.update();
+    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role);
+    
+    if(setTimer(60)) {
+        //60フレームに1度実行される
+        circleInit();
+    };
+    
+    
+    frame_count ++;
+}
+
+//circleとplayerの衝突 衝突したら該当のcircle消す
+string ofApp::checkCollision() {
+    string role;
+    for (int i = 0; i < circles.size(); i++) {
+        ofVec2f playerCenter;
+        playerCenter.x = player.xPos + player.size/2;
+        playerCenter.y = player.yPos + player.size/2;
+        float dist = sqrt(pow(circles[i].xPos - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
+        if(dist < Player_size/2 + circles[i].eSize) {
+            role = circles[i].role;
+            circles.erase(circles.begin()+i);//要素削除
+            return role;
+        }
+    }
+    return "";
+}
+
+bool ofApp::setTimer(int doCount) {
+    if(frame_count % doCount == 0) {
+        return true;
+    }
+    return false;
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+//    collition range
+//    ofSetColor(255, 255, 0);
+//    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
+    
+    ground.display();
+    
+    for(int i = 0; i < circles.size(); i ++){
+        circles[i].display();
+    }
+    
+    player.display();
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y ){
+    float mousePositionX = ofGetMouseX();
+    float stageWidth = ofGetWidth();
+    mX = (mousePositionX / stageWidth - 0.5) * 2;  //-1 ~ 1
+}
+
+//--------------------------------------------------------------
+
+void ofApp::circleInit() {
+    Circle circle;
+    float x = ofRandom(ofGetWidth());
+    
+    if(ofRandom(1.0) > 0.9) {
+        //good
+        int index = ofRandom(10);
+        string filename = "imgs/good/good-" + to_string(index) + ".png";
+        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "good");
+    }else{
+        //bad
+        int index = ofRandom(36);
+        string filename = "imgs/bad/bad-" + to_string(index) + ".png";
+        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "bad");
+    }
+    
+    circles.push_back(circle);  //配列に追加
+}

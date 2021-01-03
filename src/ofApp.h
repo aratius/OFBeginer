@@ -9,6 +9,7 @@
 
 //addons
 #include "ofxOsc.h"
+#include "ofxTween.h"
 
 class ofApp : public ofBaseApp{
 
@@ -30,4 +31,8 @@ class ofApp : public ofBaseApp{
         Ground ground;
         GamePlayer player;
         HokuyoOsc hokuyo;
+    
+        ofxTween twn;
+        ofxEasingBounce easing_bounce;
+        float twnval;
 };

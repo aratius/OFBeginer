@@ -25,7 +25,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     
 }
 
-void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role) {
+void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role, float mouseSpeed) {
     if(hokuyo_x > -360 && hokuyo_x < 360) {
         last_active_pos = hokuyo_x;
     }else {
@@ -52,15 +52,17 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     imgangle = atan2(y, x) / PI * 180 + 90;
     foot.update();
     
-    //circleが衝突してダメージを受けている状態
-    if(role != "") {
+    //circleが衝突してダメージを受けている状態あと生きてる時限定
+    if(role != "" && life) {
         if(role == "good") {
+            //回復
             u_noiseAmount = 0.;
-            color_value -= 0.1;
+            color_value -= 0.2;
             
             float duration = 2000;
             tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
         }else if(role=="bad") {
+            //ダメージ
             u_noiseAmount = 2.;
             color_value += 0.1;
             
@@ -68,6 +70,11 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
             //setParametersを呼ぶことでTween開始
             tweenUp.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
             tweenDown.setParameters(3, ease_bounce, ofxTween::easeOut, 0, -50, 500, duration);
+            
+            if(color_value >= 1.) {
+                life = false;
+                dead();
+            }
         }
         
     }
@@ -79,6 +86,10 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     bounceOffset = tweenUp.getTarget(0)+tweenDown.getTarget(0);
     tweenRotation.update();
     imgangleOffset = tweenRotation.getTarget(0);
+    
+    //勢いつけて移動した時に前傾姿勢になる
+    mouseOffset *= 0.95;
+    mouseOffset += mouseSpeed * 30;
 }
 
 void GamePlayer::display() {
@@ -89,7 +100,7 @@ void GamePlayer::display() {
     //translate Matrix
     ofPushMatrix();
     ofTranslate(xPos+size/2, yPos+size/2);
-    ofRotateZDeg(imgangle + imgangleOffset);
+    ofRotateZDeg(imgangle + imgangleOffset + mouseOffset);
     
     //shader start
     playerShader.begin();
@@ -113,4 +124,20 @@ void GamePlayer::display() {
     ofPopMatrix();
     //player end
     
+}
+
+void GamePlayer::dead() {
+    float duration = 600;
+    //setParametersを呼ぶことでTween開始
+    tweenUp.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
+    tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  duration-200, 1000, 0);
+    tweenDown.setParameters(4, ease_bounce, ofxTween::easeOut, 0, -300, 500, duration);
+    
+    ofAddListener(tweenDown.end_E, this, &GamePlayer::revival);
+}
+
+//色々な復活処理
+void GamePlayer::revival(int &e) {
+    cout<<e<<endl;
+    color_value = 0.;
 }

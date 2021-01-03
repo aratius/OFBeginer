@@ -25,10 +25,19 @@ void ofApp::setup(){
     
     hokuyo.setup();
     
+    ofSoundPlayer music;
+    music.setMultiPlay(true);
+    music.load("se/gamesound.mp3");
+//    gamemusic.setLoop(true);
+    
+    music.play();
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    ofSoundUpdate();
+    
     float hokuyo_x = hokuyo.update();
     player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x);
     

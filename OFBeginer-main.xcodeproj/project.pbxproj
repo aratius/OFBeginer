@@ -488,15 +488,15 @@
 			isa = PBXGroup;
 			children = (
 				2F1FE16E6EEE52DA7D772967 /* Player.cpp */,
-				6D6EF7A7FAD616C08383793F /* Ground.cpp */,
-				759CC408369A62F575D1BBC3 /* Hokuyo.hpp */,
-				74FFE5F7840B36AFAFDD540E /* Circle.hpp */,
-				26199C06C7DE55B1763187CB /* Ground.hpp */,
-				E416323DB1093AA4736886DA /* Circle.cpp */,
-				36F0907F2D1B55C905072405 /* PlayerFoot.cpp */,
-				00E6E80FFDC9B0F56F6A06E7 /* Hokuyo.cpp */,
-				E989CD8046629CF1C075696F /* PlayerFoot.hpp */,
 				8A79D4DDA0B1FD1D0C3FB1C7 /* Player.hpp */,
+				36F0907F2D1B55C905072405 /* PlayerFoot.cpp */,
+				E989CD8046629CF1C075696F /* PlayerFoot.hpp */,
+				00E6E80FFDC9B0F56F6A06E7 /* Hokuyo.cpp */,
+				759CC408369A62F575D1BBC3 /* Hokuyo.hpp */,
+				E416323DB1093AA4736886DA /* Circle.cpp */,
+				74FFE5F7840B36AFAFDD540E /* Circle.hpp */,
+				6D6EF7A7FAD616C08383793F /* Ground.cpp */,
+				26199C06C7DE55B1763187CB /* Ground.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";

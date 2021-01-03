@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 
+#include "ofxTween.h"
+
 class GamePlayer {
     
 public:
@@ -24,6 +26,8 @@ public:
     float xPos, yPos, size, color_value, last_active_pos, imgangle;
     float footSize = 20;
     float u_noiseAmount = 0.;
+    float bounceOffset = 0;
+    float imgangleOffset = 0;
     
     ofShader playerShader;
     ofImage playerImage;
@@ -31,6 +35,15 @@ public:
     
     PlayerFoot foot;
     
+    ofxTween tweenUp;
+    ofxTween tweenDown;
+    ofxTween tweenRotation;
+    ofxEasingBounce ease_bounce;
+    ofxEasingExpo ease_expo;
+    ofxEasingQuad ease_quad;
+    ofxEasingCirc ease_circ;
+    ofxEasingElastic ease_elastic;
+    ofxEasingBack ease_back;
 private:
     
 };

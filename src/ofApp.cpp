@@ -25,7 +25,6 @@ void ofApp::setup(){
     
     hokuyo.setup();
     
-    twn.setParameters(1, easing_bounce, ofxTween::easeOut, 100, 0, 1000, 1000);
     
 }
 
@@ -53,8 +52,6 @@ void ofApp::update(){
     
     frame_count ++;
     
-    twn.update();
-    cout<<twn.getTarget(0)<<endl;
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す

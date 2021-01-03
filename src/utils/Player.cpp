@@ -22,6 +22,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     playerShader.load("","shaders/player.frag");
     
     foot.init(0, size/2, footSize, size);
+    
 }
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role) {
@@ -36,9 +37,10 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     
 //    float angle = hokuyo_x * PI / degree;  //case hokuyo
     float angle = mX * PI / degree;  //case mouse
+    float dist = g_r + bounceOffset;
     
-    float x = sin(angle) * g_r;
-    float y = -(cos(angle) * g_r);
+    float x = sin(angle) * dist;
+    float y = -(cos(angle) * dist);
     //中心移動+anchor分
     float xForImg = x + ofGetWidth()/2 - size/2;
     //中心移動
@@ -55,12 +57,28 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
         if(role == "good") {
             u_noiseAmount = 0.;
             color_value -= 0.1;
+            
+            float duration = 2000;
+            tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
         }else if(role=="bad") {
             u_noiseAmount = 2.;
             color_value += 0.1;
+            
+            float duration = 300;
+            //setParametersを呼ぶことでTween開始
+            tweenUp.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
+            tweenDown.setParameters(3, ease_bounce, ofxTween::easeOut, 0, -50, 500, duration);
         }
+        
     }
     u_noiseAmount *= 0.99;
+    
+    //これでtweenの時間が進行する
+    tweenUp.update();
+    tweenDown.update();
+    bounceOffset = tweenUp.getTarget(0)+tweenDown.getTarget(0);
+    tweenRotation.update();
+    imgangleOffset = tweenRotation.getTarget(0);
 }
 
 void GamePlayer::display() {
@@ -71,7 +89,7 @@ void GamePlayer::display() {
     //translate Matrix
     ofPushMatrix();
     ofTranslate(xPos+size/2, yPos+size/2);
-    ofRotateZDeg(imgangle);
+    ofRotateZDeg(imgangle + imgangleOffset);
     
     //shader start
     playerShader.begin();

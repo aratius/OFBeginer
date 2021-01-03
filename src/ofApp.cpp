@@ -74,17 +74,14 @@ bool ofApp::setTimer(int doCount) {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    player.display();
-    
-    //playerの位置確認のため
-//    ofSetColor(0, 255, 0);
-//    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, player.size/2);
     
     ground.display();
     
     for(int i = 0; i < circles.size(); i ++){
         circles[i].display();
     }
+    
+    player.display();
 }
 
 //--------------------------------------------------------------

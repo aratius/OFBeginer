@@ -54,8 +54,11 @@ void ofApp::update(){
 //circleとplayerの衝突 衝突したら該当のcircle消す
 void ofApp::checkCollision() {
     for (int i = 0; i < circles.size(); i++) {
-        float dist = sqrt(pow(circles[i].xPos - player.xPos, 2) + pow(circles[i].yPos - player.yPos, 2));
-        if(dist < Player_size) {
+        ofVec2f playerCenter;
+        playerCenter.x = player.xPos + player.size/2;
+        playerCenter.y = player.yPos + player.size/2;
+        float dist = sqrt(pow(circles[i].xPos - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
+        if(dist < Player_size/2 + circles[i].eSize/2) {
             player.color_value += 0.1;
             circles.erase(circles.begin()+i);//要素削除
         }
@@ -72,6 +75,10 @@ bool ofApp::setTimer(int doCount) {
 //--------------------------------------------------------------
 void ofApp::draw(){
     player.display();
+    
+    //playerの位置確認のため
+//    ofSetColor(0, 255, 0);
+//    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, player.size/2);
     
     ground.display();
     

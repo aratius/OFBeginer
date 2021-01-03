@@ -5,6 +5,7 @@
 #include "Ground.hpp"
 #include "Player.hpp"
 #include "Hokuyo.hpp"
+#include "PlayerFoot.hpp"
 
 //addons
 #include "ofxOsc.h"

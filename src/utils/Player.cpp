@@ -15,8 +15,11 @@ void GamePlayer::init(float _x, float _y, float _size) {
     yPos = _y;
     size = _size;
     color_value = 0;
+    imgangle = 0;
     
-    playerImage.load("player.png");
+    playerImage.load("chara.png");
+    
+    foot.init(0, size/2, footSize, size);
 }
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
@@ -29,18 +32,41 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x) {
     //だいたい-1~1の値に調整（ここは手動で）
     hokuyo_x /= 50;
 //    cout << hokuyo_x << endl;
-    float angle = hokuyo_x * PI / degree;  //case hokuyo
-//    float angle = mX * PI / degree;  //case mouse
-    float x = sin(angle) * g_r + ofGetWidth()/2;
-    float y = -(cos(angle) * g_r + size) + g_y;
-    cout << y << endl;
-    xPos = x;
-    yPos = y;
+//    float angle = hokuyo_x * PI / degree;  //case hokuyo
+    float angle = mX * PI / degree;  //case mouse
+    float x = sin(angle) * g_r;
+    float y = -(cos(angle) * g_r);
+    //中心移動+anchor分
+    float xForImg = x + ofGetWidth()/2 - size/2;
+    //中心移動
+    float yForImg = y + g_y - size - footSize;
+    xPos = xForImg;
+    yPos = yForImg;
+    
+    imgangle = atan2(y, x) / PI * 180 + 90;
+    
+    foot.update();
 }
 
 void GamePlayer::display() {
-    ofSetColor(0,0,0);
+//    ofSetColor(0,0,0);
+//    ofDrawCircle(xPos, yPos, size);
     
-    ofDrawCircle(xPos, yPos, size);
+    //player start
+    ofPushMatrix();
+    ofTranslate(xPos+size/2, yPos+size/2);
+    ofRotateZDeg(imgangle);
+    playerImage.draw(-size/2, -size/2, size, size);
+    
+    //eye
+    ofSetColor(255, 255, 255);
+    ofDrawCircle(-size/10, -size*15/100, 5);
+    ofDrawCircle(size/10, -size*15/100, 5);
+    
+    //foot
+    foot.display();
+    
+    ofPopMatrix();
+    //player end
     
 }

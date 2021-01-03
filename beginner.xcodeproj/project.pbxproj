@@ -16,6 +16,7 @@
 		640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FAC65C491D4231379F3298 /* ofxOscReceiver.cpp */; };
 		650603EC3FBA777FDC7BE146 /* Ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D6EF7A7FAD616C08383793F /* Ground.cpp */; };
 		67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */; };
+		7055B5A225A0ADCC00589C27 /* PlayerFoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7055B5A025A0ADCC00589C27 /* PlayerFoot.cpp */; };
 		707B4421258DAC30002FF368 /* Hokuyo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 707B441F258DAC30002FF368 /* Hokuyo.cpp */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
 		879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9BFFBBF4CC43DEE890B3C3E /* OscTypes.cpp */; };
@@ -56,6 +57,8 @@
 		65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxOscBundle.cpp; path = ../../../addons/ofxOsc/src/ofxOscBundle.cpp; sourceTree = SOURCE_ROOT; };
 		6B65E6930994CC4B2D2B8B33 /* OscPacketListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OscPacketListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h; sourceTree = SOURCE_ROOT; };
 		6D6EF7A7FAD616C08383793F /* Ground.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Ground.cpp; path = src/utils/Ground.cpp; sourceTree = SOURCE_ROOT; };
+		7055B5A025A0ADCC00589C27 /* PlayerFoot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerFoot.cpp; sourceTree = "<group>"; };
+		7055B5A125A0ADCC00589C27 /* PlayerFoot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerFoot.hpp; sourceTree = "<group>"; };
 		707B441F258DAC30002FF368 /* Hokuyo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hokuyo.cpp; sourceTree = "<group>"; };
 		707B4420258DAC30002FF368 /* Hokuyo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hokuyo.hpp; sourceTree = "<group>"; };
 		74FFE5F7840B36AFAFDD540E /* Circle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Circle.hpp; path = src/utils/Circle.hpp; sourceTree = SOURCE_ROOT; };
@@ -341,6 +344,8 @@
 				8A79D4DDA0B1FD1D0C3FB1C7 /* Player.hpp */,
 				707B441F258DAC30002FF368 /* Hokuyo.cpp */,
 				707B4420258DAC30002FF368 /* Hokuyo.hpp */,
+				7055B5A025A0ADCC00589C27 /* PlayerFoot.cpp */,
+				7055B5A125A0ADCC00589C27 /* PlayerFoot.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				0881F1E9F4707D5630BEB492 /* Player.cpp in Sources */,
 				650603EC3FBA777FDC7BE146 /* Ground.cpp in Sources */,
+				7055B5A225A0ADCC00589C27 /* PlayerFoot.cpp in Sources */,
 				AA571C30A608E3A8672011D7 /* Circle.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,

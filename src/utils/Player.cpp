@@ -107,6 +107,12 @@ void GamePlayer::display() {
     ofPushMatrix();
     ofTranslate(xPos+size/2, yPos+size/2);
     ofRotateZDeg(imgangle + imgangleOffset + mouseOffset);
+    cout<<1;
+    cout<<imgangle<<endl;
+    cout<<2;
+    cout<<imgangleOffset<<endl;
+    cout<<3;
+    cout<<mouseOffset<<endl;
     
     //shader start
     playerShader.begin();
@@ -136,7 +142,7 @@ void GamePlayer::dead() {
     float duration = 600;
     //setParametersを呼ぶことでTween開始
     tweenUpDown.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
-    tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  duration-200, 1000, 0);
+    tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  720, 1000, 0);
     
 }
 

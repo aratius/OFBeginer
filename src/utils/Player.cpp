@@ -23,6 +23,8 @@ void GamePlayer::init(float _x, float _y, float _size) {
     
     foot.init(0, size/2, footSize, size);
     
+    ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
 }
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role, float mouseSpeed) {
@@ -36,7 +38,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     hokuyo_x /= 50;
     
 //    float angle = hokuyo_x * PI / degree;  //case hokuyo
-    float angle = mX * PI / degree;  //case mouse
+    float angle = mX * PI / degree * angleAmount;  //case mouse
     float dist = g_r + bounceOffset;
     
     float x = sin(angle) * dist;
@@ -68,12 +70,11 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
             
             float duration = 300;
             //setParametersを呼ぶことでTween開始
-            tweenUp.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
-            tweenDown.setParameters(3, ease_bounce, ofxTween::easeOut, 0, -50, 500, duration);
+            tweenUpDown.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
             
             if(color_value >= 1.) {
-                life = false;
                 dead();
+                life = false;
             }
         }
         
@@ -81,15 +82,20 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     u_noiseAmount *= 0.99;
     
     //これでtweenの時間が進行する
-    tweenUp.update();
-    tweenDown.update();
-    bounceOffset = tweenUp.getTarget(0)+tweenDown.getTarget(0);
+    tweenUpDown.update();
+    bounceOffset = tweenUpDown.getTarget(0);
     tweenRotation.update();
     imgangleOffset = tweenRotation.getTarget(0);
+    tweenAngleAmount.update();
+    if(!angleFrag) {
+        angleAmount = tweenAngleAmount.getTarget(0);
+    }
     
     //勢いつけて移動した時に前傾姿勢になる
     mouseOffset *= 0.95;
     mouseOffset += mouseSpeed * 30;
+    
+//    cout<<angleAmount<<endl;
 }
 
 void GamePlayer::display() {
@@ -129,15 +135,33 @@ void GamePlayer::display() {
 void GamePlayer::dead() {
     float duration = 600;
     //setParametersを呼ぶことでTween開始
-    tweenUp.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
+    tweenUpDown.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
     tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  duration-200, 1000, 0);
-    tweenDown.setParameters(4, ease_bounce, ofxTween::easeOut, 0, -300, 500, duration);
     
-    ofAddListener(tweenDown.end_E, this, &GamePlayer::revival);
+}
+
+void GamePlayer::tweenEnd(int &e) {
+    cout<<"callback"<<endl;
+    if(e == 4) {
+        revival();
+    }else if(e == 10) {
+        tweenUpDown.setParameters(5, ease_bounce, ofxTween::easeOut, ofGetHeight()*0.4, 0, 500, 0);
+        angleFrag = false;
+        tweenAngleAmount.setParameters(9, ease_circ, ofxTween::easeOut, 0, 1, 2000, 500);
+    }else if(e == 1) {
+        tweenUpDown.setParameters(3, ease_bounce, ofxTween::easeOut, 50, 0, 500, 0);
+    }else if(e == 2) {
+        tweenUpDown.setParameters(4, ease_bounce, ofxTween::easeOut, 100, -200, 500, 0);
+    }else if(e == 9) {
+        life = true;
+    }
 }
 
 //色々な復活処理
-void GamePlayer::revival(int &e) {
-    cout<<e<<endl;
+void GamePlayer::revival() {
+    cout<<"revival"<<endl;
     color_value = 0.;
+    angleAmount = 0;
+    angleFrag = true;
+    tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
 }

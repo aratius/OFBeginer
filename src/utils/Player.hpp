@@ -20,14 +20,21 @@ class GamePlayer {
 public:
     
     void init(float _x, float _y, float _size);
-    void update(float mX, float g_r, float g_y, float hokuyo_x, string role);
+    void update(float mX, float g_r, float g_y, float hokuyo_x, string role, float mousesSpeed);
     void display();
+    void dead();
+    void tweenEnd(int &e);
+    void revival();
     
     float xPos, yPos, size, color_value, last_active_pos, imgangle;
     float footSize = 20;
     float u_noiseAmount = 0.;
     float bounceOffset = 0;
     float imgangleOffset = 0;
+    float mouseOffset = 0;
+    float angleAmount = 1;
+    bool life = true;  //生きてるか死んでるか
+    bool angleFrag = true;  //trueの時はtweenの値を参照しない
     
     ofShader playerShader;
     ofImage playerImage;
@@ -35,9 +42,12 @@ public:
     
     PlayerFoot foot;
     
-    ofxTween tweenUp;
-    ofxTween tweenDown;
+    ofxTween tweenUpDown;
     ofxTween tweenRotation;
+    
+    ofxTween tweenRevival;
+    ofxTween tweenAngleAmount;
+    
     ofxEasingBounce ease_bounce;
     ofxEasingExpo ease_expo;
     ofxEasingQuad ease_quad;

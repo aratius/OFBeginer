@@ -42,7 +42,7 @@ void ofApp::update(){
     //cirlcleとplayerの衝突判定
     string role = checkCollision();
     float hokuyo_x = hokuyo.update();
-    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role);
+    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role, mouseSpeed);
     
     if(setTimer(60)) {
         //60フレームに1度実行される
@@ -84,13 +84,13 @@ void ofApp::draw(){
 //    ofSetColor(255, 255, 0);
 //    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
     
-    ground.display();
     
     for(int i = 0; i < circles.size(); i ++){
         circles[i].display();
     }
     
     player.display();
+    ground.display();
 }
 
 //--------------------------------------------------------------
@@ -98,6 +98,9 @@ void ofApp::mouseMoved(int x, int y ){
     float mousePositionX = ofGetMouseX();
     float stageWidth = ofGetWidth();
     mX = (mousePositionX / stageWidth - 0.5) * 2;  //-1 ~ 1
+    
+    mouseSpeed = mX - lastMousePos;
+    lastMousePos = mX;
 }
 
 //--------------------------------------------------------------

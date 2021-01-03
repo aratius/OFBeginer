@@ -21,7 +21,6 @@ void Circle::init (float _x, float _y, int _eSize, float _speed, float frame, st
     angleValue = (ofRandom(1)-0.5) * speed;
     angle = ofRandom(1) * 360;
     role = _role;
-    cout<<role<<endl;
     
     seed[0] = ofRandom(2) + 1;
     seed[1] = ofRandom(2) + 2;

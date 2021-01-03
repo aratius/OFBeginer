@@ -31,4 +31,8 @@ class ofApp : public ofBaseApp{
         Ground ground;
         GamePlayer player;
         HokuyoOsc hokuyo;
+    
+        //my variable
+        float mouseSpeed;
+        float lastMousePos;
 };

@@ -10,6 +10,7 @@ float ofApp::getGround_yPos(){
     return Ground_radius + ofGetHeight()*0.7;
 }
 
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     

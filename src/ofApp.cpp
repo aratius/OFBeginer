@@ -12,6 +12,10 @@ float ofApp::getGround_yPos(){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    //アプリビルドのために必要な一文
+    ofSetDataPathRoot("../Resources/data/");
+    
     sky.init();
     
     ofBackground(255, 255, 255);

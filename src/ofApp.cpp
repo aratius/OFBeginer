@@ -57,6 +57,7 @@ void ofApp::update(){
     
     frame_count ++;
     
+    
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す
@@ -115,14 +116,15 @@ void ofApp::circleInit() {
     Circle circle;
     float x = ofRandom(ofGetWidth());
     
+    //ファイル名を決めるところ
     if(ofRandom(1.0) > 0.9) {
         //good
-        int index = ofRandom(10);
+        int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";
         circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "good");
     }else{
         //bad
-        int index = ofRandom(36);
+        int index = ofRandom(1, 37);
         string filename = "imgs/bad/bad-" + to_string(index) + ".png";
         circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "bad");
     }

@@ -25,7 +25,7 @@
 		67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */; };
 		6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E1DB01BD6701283FC87946 /* ofxEasingQuad.cpp */; };
 		6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26C4A6254126C99F0A65354 /* ofxEasingElastic.cpp */; };
-		70D95CF325A231D10059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF125A231D10059DDF2 /* Sky.cpp */; };
+		70D95CF625A303940059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF425A303940059DDF2 /* Sky.cpp */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
 		7E769097DE6561633305B24C /* ofxEasingQuint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB8A50F8A34037BCD5DC10D0 /* ofxEasingQuint.cpp */; };
 		7F9C283866A67947B38743A5 /* PlayerFoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36F0907F2D1B55C905072405 /* PlayerFoot.cpp */; };
@@ -119,8 +119,8 @@
 		6B65E6930994CC4B2D2B8B33 /* OscPacketListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OscPacketListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h; sourceTree = SOURCE_ROOT; };
 		6D6EF7A7FAD616C08383793F /* Ground.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Ground.cpp; path = src/utils/Ground.cpp; sourceTree = SOURCE_ROOT; };
 		6FAF79F4AD0DC48C239A0E3E /* idea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = idea.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/idea.h; sourceTree = SOURCE_ROOT; };
-		70D95CF125A231D10059DDF2 /* Sky.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sky.cpp; sourceTree = "<group>"; };
-		70D95CF225A231D10059DDF2 /* Sky.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sky.hpp; sourceTree = "<group>"; };
+		70D95CF425A303940059DDF2 /* Sky.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sky.cpp; sourceTree = "<group>"; };
+		70D95CF525A303940059DDF2 /* Sky.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sky.hpp; sourceTree = "<group>"; };
 		7200EB1EC64977ED08AC0111 /* ofxXmlPoco.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxXmlPoco.h; path = ../../../addons/ofxPoco/src/ofxXmlPoco.h; sourceTree = SOURCE_ROOT; };
 		74FFE5F7840B36AFAFDD540E /* Circle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Circle.hpp; path = src/utils/Circle.hpp; sourceTree = SOURCE_ROOT; };
 		7599804C6260EC1CD8D3567D /* ofxEasingLinear.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxEasingLinear.h; path = ../../../addons/ofxTween/src/Easings/ofxEasingLinear.h; sourceTree = SOURCE_ROOT; };
@@ -500,8 +500,8 @@
 				74FFE5F7840B36AFAFDD540E /* Circle.hpp */,
 				6D6EF7A7FAD616C08383793F /* Ground.cpp */,
 				26199C06C7DE55B1763187CB /* Ground.hpp */,
-				70D95CF125A231D10059DDF2 /* Sky.cpp */,
-				70D95CF225A231D10059DDF2 /* Sky.hpp */,
+				70D95CF425A303940059DDF2 /* Sky.cpp */,
+				70D95CF525A303940059DDF2 /* Sky.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1131,7 +1131,7 @@
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
-				70D95CF325A231D10059DDF2 /* Sky.cpp in Sources */,
+				70D95CF625A303940059DDF2 /* Sky.cpp in Sources */,
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,
 				5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */,

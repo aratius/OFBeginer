@@ -5,7 +5,6 @@
 #include "Ground.hpp"
 #include "Player.hpp"
 #include "Hokuyo.hpp"
-#include "PlayerFoot.hpp"
 #include "Sky.hpp"
 
 //addons

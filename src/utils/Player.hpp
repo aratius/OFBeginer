@@ -30,7 +30,7 @@ public:
     void revival();  //復活
     
     
-    float xPos, yPos, size, color_value, last_active_pos, imgangle;
+    float xPos, yPos, size, red_value, last_active_pos, imgangle;
     float footSize = 20;
     float u_noiseAmount = 0.;
     float bounceOffset = 0;
@@ -48,10 +48,9 @@ public:
     
     ofxTween tweenUpDown;
     ofxTween tweenRotation;
-    
-    ofxTween tweenRevival;
     ofxTween tweenAngleAmount;
     
+    //イージングを余分にいっぱい羅列している
     ofxEasingBounce ease_bounce;
     ofxEasingExpo ease_expo;
     ofxEasingQuad ease_quad;

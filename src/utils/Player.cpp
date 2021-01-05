@@ -14,7 +14,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     xPos = _x;
     yPos = _y;
     size = _size;
-    color_value = 0;
+    red_value = 0;
     imgangle = 0;
     
     playerImage.load("imgs/chara.png");
@@ -77,7 +77,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
 //回復
 void GamePlayer::recovery(){
     u_noiseAmount = 0.;
-    if(color_value > 0) color_value -= 0.2;
+    if(red_value > 0) red_value -= 0.2;
     
     float duration = 2000;
     tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
@@ -87,13 +87,14 @@ void GamePlayer::recovery(){
 void GamePlayer::injury() {
     //ダメージ
     u_noiseAmount = 2.;
-    color_value += 0.1;
+    red_value += 0.1;
     
     float duration = 300;
     //setParametersを呼ぶことでTween開始
     tweenUpDown.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
     
-    if(color_value >= 1.) {
+    //真っ赤になったとき死
+    if(red_value >= 1.) {
         dead();
         life = false;
     }
@@ -111,7 +112,7 @@ void GamePlayer::dead() {
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival() {
     cout<<"revival"<<endl;
-    color_value = 0.;
+    red_value = 0.;
     angleAmount = 0;
     angleFrag = true;
     tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
@@ -133,7 +134,7 @@ void GamePlayer::display() {
     playerImage.draw(-size/2, -size/2, size, size);  //image
     playerShader.setUniformTexture("tex1", noiseTexture, 1);  //テクスチャとして渡す
     playerShader.setUniform1f("u_noiseAmount", u_noiseAmount);
-    playerShader.setUniform1f("u_color_value", color_value);
+    playerShader.setUniform1f("u_color_value", red_value);
     
     //eye
 //    ofSetColor(255, 255, 255);

@@ -50,7 +50,7 @@ void Circle::display() {
     
     ofSetColor(0, 0, 0);
 //    ofDrawCircle(0, 0, eSize);
-    textImage.draw(-eSize, -eSize, eSize*2, eSize*2);
+    textImage.draw(-eSize/2, -eSize/2, eSize, eSize);
     
     
 //    reset Matrix

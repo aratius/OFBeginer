@@ -27,7 +27,7 @@ void ofApp::setup(){
     player.init(ofGetWidth()/2, initY, Player_size);
     
     hokuyo.init();
-    injury_effect.init(100);
+    injury_effect.init(Player_size);
     
 }
 
@@ -64,8 +64,8 @@ string ofApp::checkCollision() {
         ofVec2f playerCenter;
         playerCenter.x = player.xPos + player.size/2;
         playerCenter.y = player.yPos + player.size/2;
-        float dist = sqrt(pow(circles[i].xPos - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
-        if(dist < Player_size/2 + circles[i].eSize) {
+        float dist = sqrt(pow(circles[i].xPos + circles[i].offsetX - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
+        if(dist < Player_size/2 + circles[i].eSize/2) {
             role = circles[i].role;
             if(role == "bad") injury_effect.effectStart(ofVec2f(circles[i].xPos, circles[i].yPos));
             circles.erase(circles.begin()+i);//要素削除
@@ -121,12 +121,12 @@ void ofApp::circleInit() {
         //good
         int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";
-        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "good");
+        circle.init(x, -100, Player_size, ofRandom(2) + 2, frame_count, filename, "good");
     }else{
         //bad
         int index = ofRandom(1, 37);
         string filename = "imgs/bad/bad-" + to_string(index) + ".png";
-        circle.init(x, -100, 50, ofRandom(2) + 2, frame_count, filename, "bad");
+        circle.init(x, -100, Player_size, ofRandom(2) + 2, frame_count, filename, "bad");
     }
     
     circles.push_back(circle);  //配列に追加

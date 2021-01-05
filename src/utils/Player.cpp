@@ -62,27 +62,20 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
             injury();
         }
     }
+    
     u_noiseAmount *= 0.99;
-    
-    //これでtweenの時間が進行する
-    tweenUpDown.update();
-    bounceOffset = tweenUpDown.getTarget(0);
-    tweenRotation.update();
-    imgangleOffset = tweenRotation.getTarget(0);
-    tweenAngleAmount.update();
-    if(!angleFrag) {
-        angleAmount = tweenAngleAmount.getTarget(0);
-    }
-    
     //勢いつけて移動した時に前傾姿勢になる
     mouseOffset *= 0.95;
     mouseOffset += mouseSpeed * 30;
     
-//    cout<<angleAmount<<endl;
+    //tweenを一括で実行する関数
+    tweenManage();
 }
 
+
+
+//回復
 void GamePlayer::recovery(){
-    //回復
     u_noiseAmount = 0.;
     if(color_value > 0) color_value -= 0.2;
     
@@ -90,6 +83,7 @@ void GamePlayer::recovery(){
     tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
 }
 
+//負傷
 void GamePlayer::injury() {
     //ダメージ
     u_noiseAmount = 2.;
@@ -104,6 +98,25 @@ void GamePlayer::injury() {
         life = false;
     }
 }
+
+//死（ゲームオーバー）
+void GamePlayer::dead() {
+    float duration = 600;
+    //setParametersを呼ぶことでTween開始
+    tweenUpDown.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
+    tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  720, 1000, 0);
+    
+}
+
+//復活時(各種パラメータのイニシャライズも）
+void GamePlayer::revival() {
+    cout<<"revival"<<endl;
+    color_value = 0.;
+    angleAmount = 0;
+    angleFrag = true;
+    tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
+}
+
 
 void GamePlayer::display() {
 //    ofSetColor(0,0,0);
@@ -139,12 +152,19 @@ void GamePlayer::display() {
     
 }
 
-void GamePlayer::dead() {
-    float duration = 600;
-    //setParametersを呼ぶことでTween開始
-    tweenUpDown.setParameters(2, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);
-    tweenRotation.setParameters(3, ease_elastic, ofxTween::easeOut, 0,  720, 1000, 0);
-    
+
+
+//tweenを一括で実行する関数
+void GamePlayer::tweenManage(){
+    //これでtweenの時間が進行する
+    tweenUpDown.update();
+    bounceOffset = tweenUpDown.getTarget(0);
+    tweenRotation.update();
+    imgangleOffset = tweenRotation.getTarget(0);
+    tweenAngleAmount.update();
+    if(!angleFrag) {
+        angleAmount = tweenAngleAmount.getTarget(0);
+    }
 }
 
 void GamePlayer::tweenEnd(int &e) {
@@ -162,13 +182,4 @@ void GamePlayer::tweenEnd(int &e) {
     }else if(e == 9) {
         life = true;
     }
-}
-
-//色々な復活処理
-void GamePlayer::revival() {
-    cout<<"revival"<<endl;
-    color_value = 0.;
-    angleAmount = 0;
-    angleFrag = true;
-    tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
 }

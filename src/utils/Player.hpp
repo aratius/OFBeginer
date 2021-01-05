@@ -24,6 +24,7 @@ public:
     void display();
     void recovery();
     void injury();
+    void tweenManage();
     void dead();
     void tweenEnd(int &e);
     void revival();  //復活

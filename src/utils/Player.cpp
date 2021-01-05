@@ -26,6 +26,8 @@ void GamePlayer::init(float _x, float _y, float _size) {
     
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
+    
+    ofEnableAlphaBlending();
 }
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role, float mouseSpeed) {
@@ -129,8 +131,6 @@ void GamePlayer::revival() {
 
 
 void GamePlayer::display() {
-//    ofSetColor(0,0,0);
-//    ofDrawCircle(xPos, yPos, size);
     
 //    player start
     
@@ -140,9 +140,6 @@ void GamePlayer::display() {
     
 //    座標変換1 : Groundの傾斜に伴うちょっと回転 これはエフェクトも影響受ける
     ofRotateZDeg(character_angle);
-    ofSetColor(255, 255, 255);
-//    recover recover_effect
-    recover_effect.display();
     
     //座標変換2 : 回復時のクルクルと加速移動の前傾姿勢分回転（エフェクトまで回転するのは変なのでここにエフェクト描画は含めない）
     ofRotateZDeg(character_angle_offset + character_angle_acceleration_offset);
@@ -165,6 +162,12 @@ void GamePlayer::display() {
     ofSetColor(255, 255, 255);
     ofDrawCircle(-size/10 + eye_offset, -size*15/100, 5);
     ofDrawCircle(size/10 + eye_offset, -size*15/100, 5);
+    
+//    エフェクトは座標変換2の影響を受けて欲しくないのでその分戻す（かつzindex前に表示されて欲しい)
+    ofRotateZDeg(-(character_angle_offset + character_angle_acceleration_offset));
+    ofSetColor(255, 255, 255, 100);
+//    recover recover_effect
+    recover_effect.display();
     
 //    reset Matrix
     ofPopMatrix();

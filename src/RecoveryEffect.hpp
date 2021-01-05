@@ -15,13 +15,13 @@
 class RecoveryEffect {
   
     public:
-        void init(float _duration, float _size, float _parent_size);
-        void update();
+        void init(float _duration, float _parent_size);
+        void update(float _size);
         void display();
         void effectStart();
     
         float duration;
-        float size, max_size, parent_size, xPos, yPos;
+        float size, max_size, parent_size, xPos, yPos, speed, size_offset;
         int num;
         
         ofImage texture;

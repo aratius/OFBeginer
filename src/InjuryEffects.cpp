@@ -8,15 +8,14 @@
 #include "InjuryEffects.hpp"
 
 void InjuryEffects::init(float _size) {
-    cout << "injury init" << endl;
     
     inside_size = 0;
     inside_max_size = _size;
     xPos = -999;
     yPos = -999;
     
-    inside_texture.load("imgs/effects/injury.png");
-    outside_texture.load("imgs/effects/injury.png");
+    inside_texture.load("imgs/effects/injury_orange.png");
+    outside_texture.load("imgs/effects/injury_red.png");
     
     ofAddListener(insideEffect.end_E, this, &InjuryEffects::tweenEnd);
     ofAddListener(outsideEffect.end_E, this, &InjuryEffects::tweenEnd);
@@ -40,7 +39,7 @@ void InjuryEffects::display() {
     ofTranslate(position.x, position.y);  //中心へ移動
     ofRotateZDeg(inside_angle);
     
-    ofSetColor(0, 0, 0, texture_alpha);
+    ofSetColor(255, 255, 255, texture_alpha);
     inside_texture.draw(- inside_size/2, - inside_size/2, inside_size, inside_size);
     
     ofRotateZDeg(outside_angle - inside_angle);

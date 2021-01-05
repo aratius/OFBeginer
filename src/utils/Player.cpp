@@ -70,7 +70,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     mouseOffset *= 0.95;
     mouseOffset += mouseSpeed * 30;
     
-    //tweenを一括で実行する関数
+    //[tween].update()を一括で実行する関数
     tweenManage();
 }
 
@@ -165,6 +165,7 @@ void GamePlayer::tweenManage(){
     tweenRotation.update();
     imgangleOffset = tweenRotation.getTarget(0);
     tweenAngleAmount.update();
+    //これはちょっとややこしい。angleAmountがtweenの値を参照し続けちゃうのでゲーム中はこれを無視
     if(!angleFrag) {
         angleAmount = tweenAngleAmount.getTarget(0);
     }

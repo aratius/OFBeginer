@@ -23,6 +23,8 @@ public:
     float inside_size, inside_max_size, outside_size, outside_max_size, texture_alpha;
     float xPos = 0;
     float yPos = 0;
+    float inside_angle;
+    float outside_angle;
     ofVec2f position;
     
     ofImage inside_texture;

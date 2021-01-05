@@ -49,7 +49,6 @@ void InjuryEffects::effectStart(ofVec2f pos) {
 
 void InjuryEffects::tweenEnd(int &e) {
     cout << e << endl;
-    f
     if(e == 3 ) {
         tweenAlpha.setParameters(4, ease_circ, ofxTween::easeIn, 255, 0, 200, 0);
     }

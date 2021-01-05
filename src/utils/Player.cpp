@@ -41,17 +41,19 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     float angle = mX * PI / degree * angleAmount;  //case mouse
     float dist = g_r + bounceOffset;
     
+    //imgangleを計算するための仮のx, y 実際にimageに指定するxとyはimageのアンカー分を考えてずらす必要がある
     float x = sin(angle) * dist;
     float y = -(cos(angle) * dist);
-    //中心移動+anchor分
+    imgangle = atan2(y, x) / PI * 180 + 90;
+    
+    //Groundの中心移動+anchor分
     float xForImg = x + ofGetWidth()/2 - size/2;
-    //中心移動
+    //Groundの中心移動
     float yForImg = y + g_y - size - footSize;
     
     xPos = xForImg;
     yPos = yForImg;
     
-    imgangle = atan2(y, x) / PI * 180 + 90;
     foot.update();
     
     //circleが衝突してダメージを受けている状態あと生きてる時限定

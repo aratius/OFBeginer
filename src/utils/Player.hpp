@@ -46,9 +46,9 @@ public:
     
     PlayerFoot foot;
     
-    ofxTween tweenUpDown;
-    ofxTween tweenRotation;
-    ofxTween tweenAngleAmount;
+    ofxTween tweenUpDown;  //中心からのdistのOffsetを扱う ジャンプとか昇天とか全部これ
+    ofxTween tweenRotation;  //キャラクターの回転はこれ
+    ofxTween tweenAngleAmount;  //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。
     
     //イージングを余分にいっぱい羅列している
     ofxEasingBounce ease_bounce;

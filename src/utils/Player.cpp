@@ -127,7 +127,7 @@ void GamePlayer::revival() {
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
     angleFrag = true;
-    tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
+    tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 7000);
 }
 
 
@@ -208,4 +208,8 @@ void GamePlayer::tweenEnd(int &e) {
     }else if(e == 9) {
         life = true;
     }
+}
+
+bool GamePlayer::isLife() {
+    return life;
 }

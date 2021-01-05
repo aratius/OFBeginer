@@ -53,8 +53,18 @@ void ofApp::update(){
     };
     
     frame_count ++;
-    
+
     injury_effect.update();
+    
+    if(!player.isLife() && isPlaying) {
+        cout << "helloE" << endl;
+        isPlaying = false;
+        ground.startAnimation();
+    }else if (player.isLife() && !isPlaying) {
+        isPlaying = true;
+    }
+    ground.update();
+    
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す

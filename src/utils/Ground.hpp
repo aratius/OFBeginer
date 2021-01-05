@@ -9,6 +9,8 @@
 #ifndef Ground_hpp
 #define Ground_hpp
 
+#include "ofxTween.h"
+
 #include <stdio.h>
 
 class Ground {
@@ -17,8 +19,29 @@ public:
     
     void init(float _radius, float _y);
     void display();
+    void update();
+    void startAnimation();
+    void tweenEnd(int &e);
     
     float radius, yPos;
+    float y_offset = 0;
+    float logo_alpha = 0;
+    float logo_size_amount = 0;
+    
+    ofImage logo;
+//    float logo_size_x = 
+    
+    ofxTween tweenGround;
+    ofxTween tweenlogoAlpha;
+    ofxTween tweenlogoSize;
+
+    //イージングを余分にいっぱい羅列している
+    ofxEasingBounce ease_bounce;
+    ofxEasingExpo ease_expo;
+    ofxEasingQuad ease_quad;
+    ofxEasingCirc ease_circ;
+    ofxEasingElastic ease_elastic;
+    ofxEasingBack ease_back;
     
 private:
     

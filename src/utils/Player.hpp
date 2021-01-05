@@ -29,6 +29,7 @@ public:
     void dead();
     void tweenEnd(int &e);
     void revival();  //復活
+    bool isLife();
     
     
     float xPos, yPos, size;
@@ -36,7 +37,7 @@ public:
     float eye_offset = 0;
     float u_noiseAmount = 0.;
     
-    //distに足す、Groundからいくら離れるかの値（バウンドとか、復活の時の商店とか全部これ）
+    //distに足す、Groundからいくら離れるかの値（バウンドとか、復活の時の昇天とか全部これ）
     float bounce_offset = 0;
     
     float last_active_pos = 0;  //hokuyoの値はoscから毎フレームくるわけではないので前回の有効値を記憶しておく

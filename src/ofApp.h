@@ -38,4 +38,8 @@ class ofApp : public ofBaseApp{
         //my variable
         float mouseSpeed;
         float lastMousePos;
+        bool isPlaying = true;
+        float ground_offset = 0;
+    
+        
 };

@@ -12,9 +12,49 @@ void Ground::init(float _radius, float _y) {
     radius = _radius;
     yPos = _y;
     
+    logo.load("imgs/logo.png");
+    
+    ofAddListener(tweenGround.end_E, this, &Ground::tweenEnd);
+    ofAddListener(tweenlogoAlpha.end_E, this, &Ground::tweenEnd);
+    ofAddListener(tweenlogoSize.end_E, this, &Ground::tweenEnd);
+}
+
+void Ground::update() {
+    tweenGround.update();
+    y_offset = tweenGround.getTarget(0);
+    
+    tweenlogoAlpha.update();
+    logo_alpha = tweenlogoAlpha.getTarget(0);
+    
+    tweenlogoSize.update();
+    logo_size_amount = tweenlogoSize.getTarget(0);
+}
+
+void Ground::startAnimation () {
+    tweenGround.setParameters(1, ease_circ, ofxTween::easeOut, 0, -radius*0.7, 3000, 2000);
+    tweenlogoAlpha.setParameters(3, ease_circ, ofxTween::easeOut, 0, 255, 1000, 3000);
+    
+    logo_size_amount = -100;
+    tweenlogoSize.setParameters(5, ease_elastic, ofxTween::easeOut, -100, 100, 1000, 3000);
 }
 
 void Ground::display () {
     ofSetColor(0, 0, 0);
-    ofDrawCircle(ofGetWidth()/2, yPos, radius);
+    ofDrawCircle(ofGetWidth()/2, yPos + y_offset, radius);
+    
+    ofSetColor(255, 255, 255, logo_alpha);
+    float w = ofGetWidth() * 0.8 + logo_size_amount;
+    float h = w * 0.7 + logo_size_amount;
+    logo.draw(ofGetWidth()/2 - w/2, ofGetHeight()/2 - h/2, w, h);
+}
+
+void Ground::tweenEnd(int &e) {
+    cout << e << endl;
+    if(e == 1) {
+        tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius*0.7, 0, 3000, 3500);
+    }else if (e == 2) {
+        y_offset = 0;
+    }else if (e == 3) {
+        tweenlogoAlpha.setParameters(4, ease_circ, ofxTween::easeOut, 255, 0, 1000, 4000);
+    }
 }

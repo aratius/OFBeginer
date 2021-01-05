@@ -18,3 +18,5 @@ http://aratius.site/infectedwords
 ダウンロードしたアプリケーションの実行許可 → このまま開く
 ```
 を選択
+
+これでいけるはず。windowsは持ってないのでわかりません。

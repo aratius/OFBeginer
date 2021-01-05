@@ -1,4 +1,3 @@
 # ASIIB Game
 
-app install
-http://aratius.site/infectedwords
+app install : http://aratius.site/infectedwords

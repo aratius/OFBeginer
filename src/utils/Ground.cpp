@@ -49,7 +49,6 @@ void Ground::display () {
 }
 
 void Ground::tweenEnd(int &e) {
-    cout << e << endl;
     if(e == 1) {
         tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius*0.7, 0, 3000, 3500);
     }else if (e == 2) {

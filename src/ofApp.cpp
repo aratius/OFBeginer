@@ -36,7 +36,6 @@ void ofApp::setup(){
 void ofApp::update(){
     sky.update();
     
-    
     for(int i = 0; i < circles.size(); i++) {
         circles[i].update();
         if(circles[i].yPos > ofGetHeight()) {

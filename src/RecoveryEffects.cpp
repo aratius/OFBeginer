@@ -15,8 +15,6 @@ void RecoveryEffects::init(float _duration, float _size, float _parent_size, int
     duration = _duration;
     parent_size = _parent_size;
     
-    
-    
     texture.load("imgs/effects/p_recovery.png");
     
     ofAddListener(sizeTween.end_E, this, &RecoveryEffects::tweenEnd);

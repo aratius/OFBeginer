@@ -24,7 +24,7 @@ void RecoveryEffect::update(float _size) {
     
     yPos -= speed;
     size = _size + size_offset;
-    if(size < 0) size = 0;
+    if(size < 0) size = 0;  //sizeがマイナスの時は0(意図しない反転状態になるため)
 }
 
 void RecoveryEffect::display() {

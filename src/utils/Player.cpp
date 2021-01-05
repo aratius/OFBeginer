@@ -57,27 +57,10 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     //circleが衝突してダメージを受けている状態あと生きてる時限定
     if(role != "" && life) {
         if(role == "good") {
-            //回復
-            u_noiseAmount = 0.;
-            if(color_value > 0) color_value -= 0.2;
-            
-            float duration = 2000;
-            tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
+            recovery();
         }else if(role=="bad") {
-            //ダメージ
-            u_noiseAmount = 2.;
-            color_value += 0.1;
-            
-            float duration = 300;
-            //setParametersを呼ぶことでTween開始
-            tweenUpDown.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
-            
-            if(color_value >= 1.) {
-                dead();
-                life = false;
-            }
+            injury();
         }
-        
     }
     u_noiseAmount *= 0.99;
     
@@ -96,6 +79,30 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     mouseOffset += mouseSpeed * 30;
     
 //    cout<<angleAmount<<endl;
+}
+
+void GamePlayer::recovery(){
+    //回復
+    u_noiseAmount = 0.;
+    if(color_value > 0) color_value -= 0.2;
+    
+    float duration = 2000;
+    tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
+}
+
+void GamePlayer::injury() {
+    //ダメージ
+    u_noiseAmount = 2.;
+    color_value += 0.1;
+    
+    float duration = 300;
+    //setParametersを呼ぶことでTween開始
+    tweenUpDown.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
+    
+    if(color_value >= 1.) {
+        dead();
+        life = false;
+    }
 }
 
 void GamePlayer::display() {

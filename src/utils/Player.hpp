@@ -22,9 +22,12 @@ public:
     void init(float _x, float _y, float _size);
     void update(float mX, float g_r, float g_y, float hokuyo_x, string role, float mousesSpeed);
     void display();
+    void recovery();
+    void injury();
     void dead();
     void tweenEnd(int &e);
-    void revival();
+    void revival();  //復活
+    
     
     float xPos, yPos, size, color_value, last_active_pos, imgangle;
     float footSize = 20;

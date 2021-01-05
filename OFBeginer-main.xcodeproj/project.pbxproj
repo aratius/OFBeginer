@@ -28,6 +28,7 @@
 		70D95CF625A303940059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF425A303940059DDF2 /* Sky.cpp */; };
 		70D95CF925A438820059DDF2 /* RecoveryEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */; };
 		70D95CFC25A448260059DDF2 /* RecoveryEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */; };
+		70D95CFF25A47AAC0059DDF2 /* InjuryEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CFD25A47AAC0059DDF2 /* InjuryEffects.cpp */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
 		7E769097DE6561633305B24C /* ofxEasingQuint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB8A50F8A34037BCD5DC10D0 /* ofxEasingQuint.cpp */; };
 		7F9C283866A67947B38743A5 /* PlayerFoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36F0907F2D1B55C905072405 /* PlayerFoot.cpp */; };
@@ -127,6 +128,8 @@
 		70D95CF825A438810059DDF2 /* RecoveryEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RecoveryEffect.hpp; sourceTree = "<group>"; };
 		70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RecoveryEffects.cpp; sourceTree = "<group>"; };
 		70D95CFB25A448260059DDF2 /* RecoveryEffects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RecoveryEffects.hpp; sourceTree = "<group>"; };
+		70D95CFD25A47AAC0059DDF2 /* InjuryEffects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InjuryEffects.cpp; sourceTree = "<group>"; };
+		70D95CFE25A47AAC0059DDF2 /* InjuryEffects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InjuryEffects.hpp; sourceTree = "<group>"; };
 		7200EB1EC64977ED08AC0111 /* ofxXmlPoco.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxXmlPoco.h; path = ../../../addons/ofxPoco/src/ofxXmlPoco.h; sourceTree = SOURCE_ROOT; };
 		74FFE5F7840B36AFAFDD540E /* Circle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Circle.hpp; path = src/utils/Circle.hpp; sourceTree = SOURCE_ROOT; };
 		7599804C6260EC1CD8D3567D /* ofxEasingLinear.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxEasingLinear.h; path = ../../../addons/ofxTween/src/Easings/ofxEasingLinear.h; sourceTree = SOURCE_ROOT; };
@@ -512,6 +515,8 @@
 				70D95CF825A438810059DDF2 /* RecoveryEffect.hpp */,
 				70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */,
 				70D95CFB25A448260059DDF2 /* RecoveryEffects.hpp */,
+				70D95CFD25A47AAC0059DDF2 /* InjuryEffects.cpp */,
+				70D95CFE25A47AAC0059DDF2 /* InjuryEffects.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 				27765D1BFF26BD9A6186915F /* ofxEasingCirc.cpp in Sources */,
 				E816D7D242D315FB53E23F54 /* ofxEasingCubic.cpp in Sources */,
 				6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */,
+				70D95CFF25A47AAC0059DDF2 /* InjuryEffects.cpp in Sources */,
 				59EEACB88F062457FF86492C /* ofxEasingExpo.cpp in Sources */,
 				152EAECABD008D84AF7F27F8 /* ofxEasingLinear.cpp in Sources */,
 				6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */,

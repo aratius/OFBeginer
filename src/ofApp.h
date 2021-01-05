@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "Hokuyo.hpp"
 #include "Sky.hpp"
+#include "InjuryEffects.hpp"
 
 //addons
 #include "ofxOsc.h"
@@ -31,7 +32,8 @@ class ofApp : public ofBaseApp{
         Ground ground;
         GamePlayer player;
         HokuyoOsc hokuyo;
-    Sky sky;
+        Sky sky;
+        InjuryEffects injury_effect;  //ダメージエフェクトはプレイヤーではなく文字に依存するのでこっちで呼び出し
     
         //my variable
         float mouseSpeed;

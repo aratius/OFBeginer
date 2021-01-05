@@ -96,6 +96,7 @@ void GamePlayer::recovery(){
 
 //負傷
 void GamePlayer::injury() {
+    
     //ダメージ
     u_noiseAmount = 2.;
     life_count += 0.1;

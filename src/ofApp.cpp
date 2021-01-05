@@ -12,7 +12,6 @@ float ofApp::getGround_yPos(){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
     //アプリビルドのために必要な一文
     ofSetDataPathRoot("../Resources/data/");
     
@@ -27,8 +26,8 @@ void ofApp::setup(){
     float initY = -(cos(initAngle) * Ground_radius + Player_size) + getGround_yPos();
     player.init(ofGetWidth()/2, initY, Player_size);
     
-    
     hokuyo.init();
+    injury_effect.init(100);
     
 }
 
@@ -53,10 +52,9 @@ void ofApp::update(){
         circleInit();
     };
     
-    
     frame_count ++;
     
-    
+    injury_effect.update();
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す
@@ -69,6 +67,7 @@ string ofApp::checkCollision() {
         float dist = sqrt(pow(circles[i].xPos - playerCenter.x, 2) + pow(circles[i].yPos - playerCenter.y, 2));
         if(dist < Player_size/2 + circles[i].eSize) {
             role = circles[i].role;
+            if(role == "bad") injury_effect.effectStart(ofVec2f(circles[i].xPos, circles[i].yPos));
             circles.erase(circles.begin()+i);//要素削除
             return role;
         }
@@ -97,6 +96,8 @@ void ofApp::draw(){
     
     player.display();
     ground.display();
+    
+    injury_effect.display();
 }
 
 //--------------------------------------------------------------

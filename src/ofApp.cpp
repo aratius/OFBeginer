@@ -117,7 +117,7 @@ void ofApp::circleInit() {
     float x = ofRandom(ofGetWidth());
     
     //ファイル名を決めるところ
-    if(ofRandom(1.0) > 0.9) {
+    if(ofRandom(1.0) > 0.) {
         //good
         int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";

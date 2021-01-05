@@ -26,6 +26,8 @@
 		6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E1DB01BD6701283FC87946 /* ofxEasingQuad.cpp */; };
 		6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26C4A6254126C99F0A65354 /* ofxEasingElastic.cpp */; };
 		70D95CF625A303940059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF425A303940059DDF2 /* Sky.cpp */; };
+		70D95CF925A438820059DDF2 /* RecoveryEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */; };
+		70D95CFC25A448260059DDF2 /* RecoveryEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
 		7E769097DE6561633305B24C /* ofxEasingQuint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB8A50F8A34037BCD5DC10D0 /* ofxEasingQuint.cpp */; };
 		7F9C283866A67947B38743A5 /* PlayerFoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36F0907F2D1B55C905072405 /* PlayerFoot.cpp */; };
@@ -121,6 +123,10 @@
 		6FAF79F4AD0DC48C239A0E3E /* idea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = idea.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/idea.h; sourceTree = SOURCE_ROOT; };
 		70D95CF425A303940059DDF2 /* Sky.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sky.cpp; sourceTree = "<group>"; };
 		70D95CF525A303940059DDF2 /* Sky.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sky.hpp; sourceTree = "<group>"; };
+		70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RecoveryEffect.cpp; sourceTree = "<group>"; };
+		70D95CF825A438810059DDF2 /* RecoveryEffect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RecoveryEffect.hpp; sourceTree = "<group>"; };
+		70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RecoveryEffects.cpp; sourceTree = "<group>"; };
+		70D95CFB25A448260059DDF2 /* RecoveryEffects.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RecoveryEffects.hpp; sourceTree = "<group>"; };
 		7200EB1EC64977ED08AC0111 /* ofxXmlPoco.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxXmlPoco.h; path = ../../../addons/ofxPoco/src/ofxXmlPoco.h; sourceTree = SOURCE_ROOT; };
 		74FFE5F7840B36AFAFDD540E /* Circle.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Circle.hpp; path = src/utils/Circle.hpp; sourceTree = SOURCE_ROOT; };
 		7599804C6260EC1CD8D3567D /* ofxEasingLinear.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxEasingLinear.h; path = ../../../addons/ofxTween/src/Easings/ofxEasingLinear.h; sourceTree = SOURCE_ROOT; };
@@ -502,6 +508,10 @@
 				26199C06C7DE55B1763187CB /* Ground.hpp */,
 				70D95CF425A303940059DDF2 /* Sky.cpp */,
 				70D95CF525A303940059DDF2 /* Sky.hpp */,
+				70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */,
+				70D95CF825A438810059DDF2 /* RecoveryEffect.hpp */,
+				70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */,
+				70D95CFB25A448260059DDF2 /* RecoveryEffects.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1128,6 +1138,7 @@
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
+				70D95CFC25A448260059DDF2 /* RecoveryEffects.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
@@ -1149,6 +1160,7 @@
 				59EEACB88F062457FF86492C /* ofxEasingExpo.cpp in Sources */,
 				152EAECABD008D84AF7F27F8 /* ofxEasingLinear.cpp in Sources */,
 				6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */,
+				70D95CF925A438820059DDF2 /* RecoveryEffect.cpp in Sources */,
 				85A41526FDFA1A8CDAEE81F7 /* ofxEasingQuart.cpp in Sources */,
 				7E769097DE6561633305B24C /* ofxEasingQuint.cpp in Sources */,
 				FE278F5F783581237AE8ECB2 /* ofxEasingSine.cpp in Sources */,

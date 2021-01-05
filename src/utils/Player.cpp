@@ -15,11 +15,14 @@ void GamePlayer::init(float _x, float _y, float _size) {
     yPos = _y;
     size = _size;
     
-    playerImage.load("imgs/chara2.png");
+    playerImage.load("imgs/chara.png");
     noiseTexture.load("imgs/noise.png");
     playerShader.load("","shaders/player.frag");
     
+    //foot
     foot.init(0, size/2, footSize, size);
+    //recover effect
+    recover_effect.init(500, 30, size, 20);
     
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
@@ -53,6 +56,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     yPos = yForImg;
     
     foot.update();
+    recover_effect.update();
     
     //circleが衝突してダメージを受けている状態あと生きてる時限定
     if(role != "" && life) {
@@ -78,6 +82,8 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
 
 //回復
 void GamePlayer::recovery(){
+    recover_effect.effectStart();
+    
     u_noiseAmount = 0.;
     if(life_count > 0) life_count -= 0.2;
     u_red_value = life_count;
@@ -115,7 +121,6 @@ void GamePlayer::dead() {
 
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival() {
-    cout<<"revival"<<endl;
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
     angleFrag = true;
@@ -127,19 +132,28 @@ void GamePlayer::display() {
 //    ofSetColor(0,0,0);
 //    ofDrawCircle(xPos, yPos, size);
     
-    //player start
-    //translate Matrix
+//    player start
+    
+//    translate Matrix
     ofPushMatrix();
-    ofTranslate(xPos+size/2, yPos+size/2);
-    ofRotateZDeg(character_angle + character_angle_offset + character_angle_acceleration_offset);
+    ofTranslate(xPos+size/2, yPos+size/2);  //中心へ移動
+    
+//    座標変換1 : Groundの傾斜に伴うちょっと回転 これはエフェクトも影響受ける
+    ofRotateZDeg(character_angle);
+    ofSetColor(255, 255, 255);
+//    recover recover_effect
+    recover_effect.display();
+    
+    //座標変換2 : 回復時のクルクルと加速移動の前傾姿勢分回転（エフェクトまで回転するのは変なのでここにエフェクト描画は含めない）
+    ofRotateZDeg(character_angle_offset + character_angle_acceleration_offset);
     
     //shader start
     playerShader.begin();
-    playerImage.draw(-size/2, -size/2, size, size);  //image
+    
+    playerImage.draw(ofVec2f(-size/2), size, size);  //image
     playerShader.setUniformTexture("tex1", noiseTexture, 1);  //テクスチャとして渡す
     playerShader.setUniform1f("u_noiseAmount", u_noiseAmount);
     playerShader.setUniform1f("u_color_value", u_red_value);
-    
     
     //foot
     foot.display();
@@ -154,7 +168,6 @@ void GamePlayer::display() {
     
 //    reset Matrix
     ofPopMatrix();
-    //player end
     
 }
 

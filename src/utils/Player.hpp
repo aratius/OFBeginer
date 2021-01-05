@@ -10,6 +10,7 @@
 #define Player.hpp
 
 #include "PlayerFoot.hpp"
+#include "RecoveryEffects.hpp"
 
 #include <stdio.h>
 
@@ -61,6 +62,7 @@ public:
     ofImage noiseTexture;
     
     PlayerFoot foot;
+    RecoveryEffects recover_effect;
     
     ofxTween tweenUpDown;  //中心からのdistのOffsetを扱う ジャンプとか昇天とか全部これ
     ofxTween tweenRotation;  //キャラクターの回転はこれ

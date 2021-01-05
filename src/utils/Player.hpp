@@ -30,13 +30,29 @@ public:
     void revival();  //復活
     
     
-    float xPos, yPos, size, red_value, last_active_pos, imgangle;
+    float xPos, yPos, size;
     float footSize = 20;
+    float eye_offset = 0;
     float u_noiseAmount = 0.;
-    float bounceOffset = 0;
-    float imgangleOffset = 0;
-    float mouseOffset = 0;
-    float angleAmount = 1;
+    
+    //distに足す、Groundからいくら離れるかの値（バウンドとか、復活の時の商店とか全部これ）
+    float bounce_offset = 0;
+    
+    float last_active_pos = 0;  //hokuyoの値はoscから毎フレームくるわけではないので前回の有効値を記憶しておく
+    
+    //残りライフを表すパラメータ
+    float u_red_value = 0;  //シェーダーに渡す値
+    float life_count = 0;  //1で死ぬ
+    
+    //キャラクターの角度
+    float character_angle = 0;
+    float character_angle_offset = 0;  //くるっと1回転
+    float character_angle_acceleration_offset = 0;  //横の加速移動に対してのちょい回転
+    
+    float mouse_offset = 0;  //マウスの加速度 マイフレーム*= 0.99とかで徐々に減ってく
+    
+    float position_angleAmount = 1;  //曲座標から算出するGround中心から見た角度
+    
     bool life = true;  //生きてるか死んでるか
     bool angleFrag = true;  //trueの時はtweenの値を参照しない
     

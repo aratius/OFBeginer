@@ -14,10 +14,8 @@ void GamePlayer::init(float _x, float _y, float _size) {
     xPos = _x;
     yPos = _y;
     size = _size;
-    red_value = 0;
-    imgangle = 0;
     
-    playerImage.load("imgs/chara.png");
+    playerImage.load("imgs/chara2.png");
     noiseTexture.load("imgs/noise.png");
     playerShader.load("","shaders/player.frag");
     
@@ -38,13 +36,13 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     hokuyo_x /= 50;
     
 //    float angle = hokuyo_x * PI / degree;  //case hokuyo
-    float angle = mX * PI / degree * angleAmount;  //case mouse
-    float dist = g_r + bounceOffset;
+    float angle = mX * PI / degree * position_angleAmount;  //case mouse
+    float dist = g_r + bounce_offset;
     
-    //imgangleを計算するための仮のx, y 実際にimageに指定するxとyはimageのアンカー分を考えてずらす必要がある
+    //character_angleを計算するための仮のx, y 実際にimageに指定するxとyはimageのアンカー分を考えてずらす必要がある
     float x = sin(angle) * dist;
     float y = -(cos(angle) * dist);
-    imgangle = atan2(y, x) / PI * 180 + 90;
+    character_angle = atan2(y, x) / PI * 180 + 90;
     
     //Groundの中心移動+anchor分
     float xForImg = x + ofGetWidth()/2 - size/2;
@@ -67,8 +65,10 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     
     u_noiseAmount *= 0.99;
     //勢いつけて移動した時に前傾姿勢になる
-    mouseOffset *= 0.95;
-    mouseOffset += mouseSpeed * 30;
+    mouse_offset *= 0.95;
+    mouse_offset += mouseSpeed * 30;
+    character_angle_acceleration_offset = mouse_offset;
+    eye_offset = mouse_offset;
     
     //[tween].update()を一括で実行する関数
     tweenManage();
@@ -79,7 +79,8 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
 //回復
 void GamePlayer::recovery(){
     u_noiseAmount = 0.;
-    if(red_value > 0) red_value -= 0.2;
+    if(life_count > 0) life_count -= 0.2;
+    u_red_value = life_count;
     
     float duration = 2000;
     tweenRotation.setParameters(10, ease_elastic, ofxTween::easeOut, 0, 720, duration, 0);
@@ -89,14 +90,15 @@ void GamePlayer::recovery(){
 void GamePlayer::injury() {
     //ダメージ
     u_noiseAmount = 2.;
-    red_value += 0.1;
+    life_count += 0.1;
+    u_red_value = life_count;
     
     float duration = 300;
     //setParametersを呼ぶことでTween開始
     tweenUpDown.setParameters(1, ease_circ, ofxTween::easeOut, 0, 50, duration, 0);
     
     //真っ赤になったとき死
-    if(red_value >= 1.) {
+    if(life_count >= 1.) {
         dead();
         life = false;
     }
@@ -114,8 +116,8 @@ void GamePlayer::dead() {
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival() {
     cout<<"revival"<<endl;
-    red_value = 0.;
-    angleAmount = 0;
+    life_count = u_red_value = 0.;
+    position_angleAmount = 0;
     angleFrag = true;
     tweenUpDown.setParameters(10, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 4000);
 }
@@ -129,25 +131,26 @@ void GamePlayer::display() {
     //translate Matrix
     ofPushMatrix();
     ofTranslate(xPos+size/2, yPos+size/2);
-    ofRotateZDeg(imgangle + imgangleOffset + mouseOffset);
+    ofRotateZDeg(character_angle + character_angle_offset + character_angle_acceleration_offset);
     
     //shader start
     playerShader.begin();
     playerImage.draw(-size/2, -size/2, size, size);  //image
     playerShader.setUniformTexture("tex1", noiseTexture, 1);  //テクスチャとして渡す
     playerShader.setUniform1f("u_noiseAmount", u_noiseAmount);
-    playerShader.setUniform1f("u_color_value", red_value);
+    playerShader.setUniform1f("u_color_value", u_red_value);
     
-    //eye
-//    ofSetColor(255, 255, 255);
-//    ofDrawCircle(-size/10, -size*15/100, 5);
-//    ofDrawCircle(size/10, -size*15/100, 5);
     
     //foot
     foot.display();
     
     playerShader.end();
     //shader end
+    
+    //eye
+    ofSetColor(255, 255, 255);
+    ofDrawCircle(-size/10 + eye_offset, -size*15/100, 5);
+    ofDrawCircle(size/10 + eye_offset, -size*15/100, 5);
     
 //    reset Matrix
     ofPopMatrix();
@@ -160,19 +163,21 @@ void GamePlayer::display() {
 //tweenを一括で実行する関数
 void GamePlayer::tweenManage(){
     //これでtweenの時間が進行する
+    
     tweenUpDown.update();
-    bounceOffset = tweenUpDown.getTarget(0);
+    bounce_offset = tweenUpDown.getTarget(0);
+    
     tweenRotation.update();
-    imgangleOffset = tweenRotation.getTarget(0);
+    character_angle_offset = tweenRotation.getTarget(0);
+    
+    //これはちょっとややこしい。position_angleAmountがtweenの値を参照し続けちゃうのでゲーム中はこれを無視
     tweenAngleAmount.update();
-    //これはちょっとややこしい。angleAmountがtweenの値を参照し続けちゃうのでゲーム中はこれを無視
     if(!angleFrag) {
-        angleAmount = tweenAngleAmount.getTarget(0);
+        position_angleAmount = tweenAngleAmount.getTarget(0);
     }
 }
 
 void GamePlayer::tweenEnd(int &e) {
-    cout<<"callback"<<endl;
     if(e == 4) {
         revival();
     }else if(e == 10) {

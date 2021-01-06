@@ -14,19 +14,19 @@ void Buildings::init(float _size, float _yPos) {
     
     //真ん中
     bg_1.load("imgs/bg/bg_1.png");
-    bg_1_alpha = 0.6;
+    bg_1_alpha = 0.75;
     bg_1_speed_devide = 0.6;
     
     //奥
     bg_2.load("imgs/bg/bg_2.png");
     transparentShader.load("", "shaders/transparent.frag");
-    bg_2_alpha = 0.5;
+    bg_2_alpha = 0.9;
     bg_2_speed_devide = 0.4;
     
     //手前
     bg_3.load("imgs/bg/bg_3.png");
     transparentShader.load("", "shaders/transparent.frag");
-    bg_3_alpha = 0.7;
+    bg_3_alpha = 0.6;
     bg_3_speed_devide = 0.8;
     
 }

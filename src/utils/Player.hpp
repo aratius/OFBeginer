@@ -31,7 +31,8 @@ public:
     void tweenEnd(int &e);
     void revival();  //復活
     void revival_clear();
-    bool isLife();
+    string isLife();
+    string state = "playing";
     
     
     float xPos, yPos, size;
@@ -71,7 +72,10 @@ public:
     ofxTween tweenUpDown;  //中心からのdistのOffsetを扱う ジャンプとか昇天とか全部これ
     ofxTween tweenRotationZ;  //キャラクターの回転はこれ
     ofxTween tweenRotationY;
-    ofxTween tweenAngleAmount;  //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。
+    //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。
+    ofxTween tweenAngleAmount;
+    //tweenの機能は持たず、n秒後に処理を実行するために利用する
+    ofxTween tweenEmpty;
     
     //イージングを余分にいっぱい羅列している
     ofxEasingBounce ease_bounce;

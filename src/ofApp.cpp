@@ -56,11 +56,11 @@ void ofApp::update(){
 
     injury_effect.update();
     
-    if(!player.isLife() && isPlaying) {
-        cout << "helloE" << endl;
+    if(player.isLife() != "playing" && isPlaying) {
+        cout << player.isLife() << endl;
         isPlaying = false;
-        ground.startAnimation();
-    }else if (player.isLife() && !isPlaying) {
+        ground.startAnimation(player.isLife());
+    }else if (player.isLife() == "playing" && !isPlaying) {
         isPlaying = true;
     }
     ground.update();

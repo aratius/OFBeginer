@@ -11,6 +11,8 @@
 
 #include "ofxTween.h"
 
+#include "Paper.hpp"
+
 #include <stdio.h>
 
 class Ground {
@@ -20,7 +22,7 @@ public:
     void init(float _radius, float _y);
     void display();
     void update();
-    void startAnimation();
+    void startAnimation(string state);
     void tweenEnd(int &e);
     
     float radius, yPos;
@@ -29,7 +31,8 @@ public:
     float logo_size_amount = 0;
     
     ofImage logo;
-//    float logo_size_x = 
+    
+    vector<Paper> papers;
     
     ofxTween tweenGround;
     ofxTween tweenlogoAlpha;

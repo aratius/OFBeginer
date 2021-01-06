@@ -1,9 +1,3 @@
-//
-//  Player.cpp
-//  beginner
-//
-//  Created by 松本新 on 2020/12/15.
-//
 // Tween番号の割り振り法則
 // 0 : コールバックなし
 // 30番台 : クリア時の演出
@@ -33,6 +27,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenEmpty.end_E, this, &GamePlayer::tweenEnd);
     
     ofEnableAlphaBlending();
 }
@@ -126,18 +121,17 @@ void GamePlayer::injury() {
 }
 
 void GamePlayer::clear() {
-    for(int i = 0; i < 100; i ++ ){
-        cout << "clear()" <<endl;
-    }
+    state = "clear";
     float duration = 600;
     tweenUpDown.setParameters(31, ease_circ, ofxTween::easeOut, 0, 300, duration*2, 0);  //ジャンプ
-    tweenRotationY.setParameters(0, ease_elastic, ofxTween::easeOut, 0,  720*2, 2000, 0);
+    tweenRotationY.setParameters(0, ease_circ, ofxTween::easeOut, 0,  720*2, 2000, 0);
     angleFrag = false;  //falseにすることで
     tweenAngleAmount.setParameters(0, ease_circ, ofxTween::easeOut, 1, 0, 2000, 0);
 }
 
 //死（ゲームオーバー）
 void GamePlayer::dead() {
+    state = "dead";
     float duration = 600;
     //setParametersを呼ぶことでTween開始
     tweenUpDown.setParameters(41, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);  //ジャンプ
@@ -147,6 +141,7 @@ void GamePlayer::dead() {
 
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival() {
+    state = "playing";
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
     angleFrag = true;
@@ -154,7 +149,7 @@ void GamePlayer::revival() {
 }
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival_clear() {
-    life_count = u_red_value = 0.;
+    state = "playing";
     position_angleAmount = 0;
     angleFrag = true;
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, 0, ofGetHeight()*0.4, 5000, 7000);
@@ -225,30 +220,35 @@ void GamePlayer::tweenManage(){
     
     tweenRotationY.update();
     character_angle_y = tweenRotationY.getTarget(0);
+    
+    tweenEmpty.update();
 }
 
 void GamePlayer::tweenEnd(int &e) {
-    if(e == 42) {
-        revival();
-    }else if(e == 91) {
-        tweenUpDown.setParameters(92, ease_bounce, ofxTween::easeOut, ofGetHeight()*0.4, 0, 500, 0);
-        angleFrag = false;
-        tweenAngleAmount.setParameters(93, ease_circ, ofxTween::easeOut, 0, 1, 2000, 500);
-    }else if(e == 51) {
-        tweenUpDown.setParameters(52, ease_bounce, ofxTween::easeOut, 50, 0, 500, 0);
-    }else if(e == 41) {
-        //地面にめり込む
-        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 100, -200, 500, 0);
-    }else if(e == 93) {
-        life = true;
-    }else if(e == 31) {
+    if(e == 31) {
         //かっこよく着地
         tweenUpDown.setParameters(32, ease_bounce, ofxTween::easeOut, 300, 0, 500, 0);
     }else if(e == 32) {
         revival_clear();
+        tweenEmpty.setParameters(33, ease_bounce, ofxTween::easeOut, 0, 0, 2000, 0);
+    }else if(e == 33) {
+        life_count = u_red_value = 0.;
+    }else if (e == 41) {
+        //地面にめり込む
+        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 100, -200, 500, 0);
+    }else if(e == 42) {
+        revival();
+    }else if(e == 51) {
+        tweenUpDown.setParameters(52, ease_bounce, ofxTween::easeOut, 50, 0, 500, 0);
+    }else if(e == 91) {
+        tweenUpDown.setParameters(0, ease_bounce, ofxTween::easeOut, ofGetHeight()*0.4, 0, 500, 0);
+        angleFrag = false;
+        tweenAngleAmount.setParameters(92, ease_circ, ofxTween::easeOut, 0, 1, 2000, 500);
+    }else if(e == 92) {
+        life = true;
     }
 }
 
-bool GamePlayer::isLife() {
-    return life;
+string GamePlayer::isLife() {
+    return state;
 }

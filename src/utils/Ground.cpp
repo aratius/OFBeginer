@@ -12,7 +12,6 @@ void Ground::init(float _radius, float _y) {
     radius = _radius;
     yPos = _y;
     
-    logo.load("imgs/logo.png");
     
     ofAddListener(tweenGround.end_E, this, &Ground::tweenEnd);
     ofAddListener(tweenlogoAlpha.end_E, this, &Ground::tweenEnd);
@@ -31,6 +30,11 @@ void Ground::update() {
 }
 
 void Ground::startAnimation () {
+    //2種類のロゴからランダムに選択
+    int random = ofRandom(1, 3);
+    string filename = "imgs/logo" + to_string(random) + ".png";
+    logo.load(filename);
+    
     tweenGround.setParameters(1, ease_circ, ofxTween::easeOut, 0, -radius*0.7, 3000, 2000);
     tweenlogoAlpha.setParameters(3, ease_circ, ofxTween::easeOut, 0, 255, 1000, 3000);
     

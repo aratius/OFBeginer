@@ -26,6 +26,7 @@ void Circle::init (float _x, float _y, int _eSize, float _speed, float frame, st
     seed[1] = ofRandom(2) + 2;
     
     textImage.load(filename);
+    goldShader.load("", "shaders/gold.frag");
 }
 
 void Circle::update() {
@@ -50,8 +51,12 @@ void Circle::display() {
     
     ofSetColor(0, 0, 0);
 //    ofDrawCircle(0, 0, eSize);
+    
+    if(role == "good") goldShader.begin();
+    
     textImage.draw(-eSize/2, -eSize/2, eSize, eSize);
     
+    if(role == "good") goldShader.end();
     
 //    reset Matrix
     ofPopMatrix();

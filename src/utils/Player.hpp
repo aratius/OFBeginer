@@ -26,9 +26,11 @@ public:
     void recovery();
     void injury();
     void tweenManage();
+    void clear();
     void dead();
     void tweenEnd(int &e);
     void revival();  //復活
+    void revival_clear();
     bool isLife();
     
     
@@ -50,6 +52,7 @@ public:
     float character_angle = 0;
     float character_angle_offset = 0;  //くるっと1回転
     float character_angle_acceleration_offset = 0;  //横の加速移動に対してのちょい回転
+    float character_angle_y = 0;
     
     float mouse_offset = 0;  //マウスの加速度 マイフレーム*= 0.99とかで徐々に減ってく
     
@@ -66,7 +69,8 @@ public:
     RecoveryEffects recover_effect;
     
     ofxTween tweenUpDown;  //中心からのdistのOffsetを扱う ジャンプとか昇天とか全部これ
-    ofxTween tweenRotation;  //キャラクターの回転はこれ
+    ofxTween tweenRotationZ;  //キャラクターの回転はこれ
+    ofxTween tweenRotationY;
     ofxTween tweenAngleAmount;  //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。
     
     //イージングを余分にいっぱい羅列している

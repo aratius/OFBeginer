@@ -24,6 +24,7 @@ public:
     string role;  //悪役かどうか
     
     ofImage textImage;
+    ofShader goldShader;
     
 private:
     

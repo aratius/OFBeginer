@@ -20,8 +20,16 @@ void main() {
 
   //白のところはそのまんま
   if(!(color.r==1. && color.g==1. && color.b==1.)) {
-    if(!(pos.y < 921. * (1.-u_color_value))) {
-      color.r = u_color_value;
+    if(!(pos.y < 921. * (1.-abs(u_color_value)))) {
+      if(u_color_value >= 0.) {
+        color.r = u_color_value*216./255.;
+        color.g = u_color_value*73./255.;
+        color.b = u_color_value*54./255.;
+      }else if (u_color_value <= 0.) {
+        color.r = -u_color_value*54./255.;
+        color.g = -u_color_value*216./255.;
+        color.b = -u_color_value*189./255.;
+      }
     }
     
   }

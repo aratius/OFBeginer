@@ -38,7 +38,6 @@ void Paper::update() {
     
     rotation = ofVec3f(ofGetElapsedTimef() * seed_rotarion.x, ofGetElapsedTimef() * seed_rotarion.y, ofGetElapsedTimef() * seed_rotarion.z);
     
-    cout << pos.y << endl;
     
     
 }

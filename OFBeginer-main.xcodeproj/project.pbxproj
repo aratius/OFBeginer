@@ -26,6 +26,7 @@
 		6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9E1DB01BD6701283FC87946 /* ofxEasingQuad.cpp */; };
 		6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26C4A6254126C99F0A65354 /* ofxEasingElastic.cpp */; };
 		704B825C25A57B2A00721CFA /* Paper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704B825A25A57B2A00721CFA /* Paper.cpp */; };
+		704B825F25A5F7A400721CFA /* Buildings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704B825D25A5F7A400721CFA /* Buildings.cpp */; };
 		70D95CF625A303940059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF425A303940059DDF2 /* Sky.cpp */; };
 		70D95CF925A438820059DDF2 /* RecoveryEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */; };
 		70D95CFC25A448260059DDF2 /* RecoveryEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */; };
@@ -125,6 +126,8 @@
 		6FAF79F4AD0DC48C239A0E3E /* idea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = idea.h; path = ../../../addons/ofxPoco/libs/openssl/include/openssl/idea.h; sourceTree = SOURCE_ROOT; };
 		704B825A25A57B2A00721CFA /* Paper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Paper.cpp; sourceTree = "<group>"; };
 		704B825B25A57B2A00721CFA /* Paper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Paper.hpp; sourceTree = "<group>"; };
+		704B825D25A5F7A400721CFA /* Buildings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buildings.cpp; sourceTree = "<group>"; };
+		704B825E25A5F7A400721CFA /* Buildings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Buildings.hpp; sourceTree = "<group>"; };
 		70D95CF425A303940059DDF2 /* Sky.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sky.cpp; sourceTree = "<group>"; };
 		70D95CF525A303940059DDF2 /* Sky.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sky.hpp; sourceTree = "<group>"; };
 		70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RecoveryEffect.cpp; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 				70D95CFE25A47AAC0059DDF2 /* InjuryEffects.hpp */,
 				704B825A25A57B2A00721CFA /* Paper.cpp */,
 				704B825B25A57B2A00721CFA /* Paper.hpp */,
+				704B825D25A5F7A400721CFA /* Buildings.cpp */,
+				704B825E25A5F7A400721CFA /* Buildings.hpp */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -1169,6 +1174,7 @@
 				E816D7D242D315FB53E23F54 /* ofxEasingCubic.cpp in Sources */,
 				6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */,
 				70D95CFF25A47AAC0059DDF2 /* InjuryEffects.cpp in Sources */,
+				704B825F25A5F7A400721CFA /* Buildings.cpp in Sources */,
 				59EEACB88F062457FF86492C /* ofxEasingExpo.cpp in Sources */,
 				152EAECABD008D84AF7F27F8 /* ofxEasingLinear.cpp in Sources */,
 				6D7B53ED56654ABBF2FF13B1 /* ofxEasingQuad.cpp in Sources */,

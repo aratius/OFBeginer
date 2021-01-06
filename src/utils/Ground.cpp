@@ -16,10 +16,12 @@ void Ground::init(float _radius, float _y) {
     ofAddListener(tweenlogoAlpha.end_E, this, &Ground::tweenEnd);
     ofAddListener(tweenlogoSize.end_E, this, &Ground::tweenEnd);
     
+    
 }
 
 void Ground::update() {
     tweenGround.update();
+    
     y_offset = tweenGround.getTarget(0);
     
     tweenlogoAlpha.update();
@@ -31,6 +33,7 @@ void Ground::update() {
     for (int i = 0; i < papers.size(); i++) {
         papers[i].update();
     }
+    
     
 }
 
@@ -56,6 +59,7 @@ void Ground::startAnimation (string state) {
 }
 
 void Ground::display () {
+    
     ofSetColor(0, 0, 0);
     ofDrawCircle(ofGetWidth()/2, yPos + y_offset, radius);  //Ground (big)
     
@@ -75,7 +79,8 @@ void Ground::tweenEnd(int &e) {
         tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius*0.7, 0, 3000, 3500);
     }else if (e == 2) {
         y_offset = 0;
+        papers.clear();
     }else if (e == 3) {
-        tweenlogoAlpha.setParameters(4, ease_circ, ofxTween::easeOut, 255, 0, 1000, 4000);
+        tweenlogoAlpha.setParameters(4, ease_circ, ofxTween::easeIn, 255, 0, 1000, 3300);
     }
 }

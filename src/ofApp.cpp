@@ -29,6 +29,8 @@ void ofApp::setup(){
     hokuyo.init();
     injury_effect.init(Player_size);
     
+    buildings.init(Ground_radius, getGround_yPos());
+    
 }
 
 //--------------------------------------------------------------
@@ -65,6 +67,8 @@ void ofApp::update(){
     }
     ground.update();
     
+    buildings.update();
+    
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す
@@ -99,6 +103,7 @@ void ofApp::draw(){
 //    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
     
     sky.display();
+    buildings.display();
     
     for(int i = 0; i < circles.size(); i ++){
         circles[i].display();

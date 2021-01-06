@@ -105,9 +105,10 @@ void ofApp::draw(){
     }
     
     player.display();
-    ground.display();
     
     injury_effect.display();
+    
+    ground.display();
 }
 
 //--------------------------------------------------------------

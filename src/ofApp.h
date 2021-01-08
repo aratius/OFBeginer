@@ -38,6 +38,8 @@ class ofApp : public ofBaseApp{
         InjuryEffects injury_effect;  //ダメージエフェクトはプレイヤーではなく文字に依存するのでこっちで呼び出し
         Buildings buildings;
     
+//        ofSoundPlayer bg_music;
+    
         //my variable
         float mouseSpeed;
         float lastMousePos;

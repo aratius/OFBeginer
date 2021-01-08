@@ -31,6 +31,9 @@ void ofApp::setup(){
     
     buildings.init(Ground_radius, getGround_yPos());
     
+//    bg_music.load("se/gamesound.mp3");
+//    bg_music.play();
+    
 }
 
 //--------------------------------------------------------------

@@ -8,7 +8,10 @@
 
 #include "Player.hpp"
 
-#define degree 10
+#define degree 10 
+//#define degree 4
+
+#define input "key"
 
 void GamePlayer::init(float _x, float _y, float _size) {
     
@@ -33,17 +36,34 @@ void GamePlayer::init(float _x, float _y, float _size) {
 }
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role, float mouseSpeed) {
-    if(hokuyo_x > -360 && hokuyo_x < 360) {
-        last_active_pos = hokuyo_x;
-    }else {
-        //期待した値が来なかったら前回の有効値使う
-        hokuyo_x = last_active_pos;
-    }
-    //だいたい-1~1の値に調整（ここは手動で）
-    hokuyo_x /= 50;
     
-//    float angle = hokuyo_x * PI / degree;  //case hokuyo
-    float angle = mX * PI / degree * position_angleAmount;  //case mouse
+    
+    float angle;
+    if(input == "mouse") {
+        angle = mX * PI / degree * position_angleAmount;  //case mouse
+    }else if(input == "hokuyo") {
+        if(hokuyo_x > -360 && hokuyo_x < 360 && !(hokuyo_x > -0.5 && hokuyo_x < 0.5)) {
+            last_active_pos = hokuyo_x;
+        }else {
+            //期待した値が来なかったら前回の有効値使う
+            hokuyo_x = last_active_pos;
+        }
+        //だいたい-1~1の値に調整（ここは手動で）
+        hokuyo_x /= 50;
+        angle = hokuyo_x * PI / degree;  //case hokuyo
+    }else if(input == "key") {
+        key_pos += key_speed;
+        key_speed *= 0.96;
+        if(key_pos < -1.5) {
+            key_pos = -1.5;
+            key_speed *= -1;
+        }else if (key_pos > 1.5){
+            key_pos = 1.5;
+            key_speed *= -1.3;
+        }
+        cout << key_speed <<endl;
+        angle = key_pos * PI / degree;  //case key
+    }
     float dist = g_r + bounce_offset;
     
     //character_angleを計算するための仮のx, y 実際にimageに指定するxとyはimageのアンカー分を考えてずらす必要がある
@@ -251,4 +271,12 @@ void GamePlayer::tweenEnd(int &e) {
 
 string GamePlayer::isLife() {
     return state;
+}
+
+void GamePlayer::keyPressed(int key) {
+    if(key == 57356) {
+        if(key_speed > -0.3) key_speed -= 0.02;
+    }else if (key == 57358) {
+        if(key_speed < 0.3) key_speed += 0.02;
+    }
 }

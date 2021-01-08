@@ -32,7 +32,6 @@ void Buildings::init(float _size, float _yPos) {
 }
 
 void Buildings::update() {
-    cout << "builgings ini" << endl;
 }
 
 void Buildings::display() {

@@ -28,5 +28,4 @@ float HokuyoOsc::update() {
         }
     
     return hokuyo_x;
-    frame ++;
 }

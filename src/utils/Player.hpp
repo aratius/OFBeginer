@@ -34,6 +34,7 @@ public:
     string isLife();
     string state = "playing";
     
+    void keyPressed(int key);
     
     float xPos, yPos, size;
     float footSize = 20;
@@ -61,6 +62,9 @@ public:
     
     bool life = true;  //生きてるか死んでるか
     bool angleFrag = true;  //trueの時はtweenの値を参照しない
+    
+    float key_pos = 0;
+    float key_speed = 0;
     
     ofShader playerShader;
     ofImage playerImage;

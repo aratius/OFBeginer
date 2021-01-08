@@ -21,6 +21,7 @@ class ofApp : public ofBaseApp{
 		void draw();
 
 		void mouseMoved(int x, int y );
+        void keyPressed(int key);
 		
         // my function
         float getGround_yPos();

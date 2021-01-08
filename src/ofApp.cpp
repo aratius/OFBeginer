@@ -133,7 +133,7 @@ void ofApp::circleInit() {
     float x = ofRandom(ofGetWidth());
     
     //ファイル名を決めるところ
-    if(ofRandom(1.0) > 0.5) {
+    if(ofRandom(1.0) > 0.85) {
         //good
         int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";
@@ -146,4 +146,8 @@ void ofApp::circleInit() {
     }
     
     circles.push_back(circle);  //配列に追加
+}
+
+void ofApp::keyPressed(int key) {
+    player.keyPressed(key);
 }

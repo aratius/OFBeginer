@@ -1,10 +1,3 @@
-//
-//  Ground.cpp
-//  beginner
-//
-//  Created by 松本新 on 2020/12/15.
-//
-
 #include "Ground.hpp"
 
 void Ground::init(float _radius, float _y) {
@@ -29,18 +22,17 @@ void Ground::update() {
     
     tweenlogoSize.update();
     logo_size_amount = tweenlogoSize.getTarget(0);
-    
+
     for (int i = 0; i < papers.size(); i++) {
         papers[i].update();
     }
-    
-    
+
 }
 
 void Ground::startAnimation (string state) {
     //2種類のロゴからランダムに選択
     int random = ofRandom(1, 3);
-    string filename = "imgs/logo" + to_string(random) + ".png";
+    string filename = "imgs/logos/logo" + to_string(random) + ".png";
     logo.load(filename);
     
     tweenGround.setParameters(1, ease_circ, ofxTween::easeOut, 0, -radius, 3000, 2000);

@@ -12,6 +12,9 @@
 //#define degree 4
 
 #define input "key"
+#define key_pos_bounce 2.0
+
+#define angle_offset_devide 60
 
 void GamePlayer::init(float _x, float _y, float _size) {
     
@@ -44,7 +47,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
         
         //勢いつけて移動した時に前傾姿勢になる
         mouse_offset *= 0.95;
-        mouse_offset += mouseSpeed * 30;
+        mouse_offset += mouseSpeed * angle_offset_devide;
         character_angle_acceleration_offset = mouse_offset;
         eye_offset = mouse_offset;
     }else if(input == "hokuyo") {
@@ -60,17 +63,17 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     }else if(input == "key") {
         key_pos += key_speed;
         key_speed *= 0.96;
-        if(key_pos < -1.5) {
-            key_pos = -1.5;
+        if(key_pos < -key_pos_bounce) {
+            key_pos = -key_pos_bounce;
             key_speed *= -1;
-        }else if (key_pos > 1.5){
-            key_pos = 1.5;
-            key_speed *= -1.3;
+        }else if (key_pos > key_pos_bounce){
+            key_pos = key_pos_bounce;
+            key_speed *= -1;
         }
         angle = key_pos * PI / degree * position_angleAmount;  //case key
         
         //勢いつけて移動した時に前傾姿勢になる
-        key_offset += key_speed * 30;
+        key_offset += key_speed * angle_offset_devide;
         key_offset *= 0.95;
         character_angle_acceleration_offset = key_offset;
         eye_offset = key_offset;
@@ -171,7 +174,7 @@ void GamePlayer::revival() {
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
     angleFrag = true;
-    tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, -200, ofGetHeight()*0.4, 5000, 7000);
+    tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, -size*2, ofGetHeight()*0.4, 5000, 7000);
 }
 //復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival_clear() {
@@ -212,8 +215,8 @@ void GamePlayer::display() {
     
     //eye
     ofSetColor(255, 255, 255);
-    ofDrawCircle(-size/10 + eye_offset, -size*15/100, 5);
-    ofDrawCircle(size/10 + eye_offset, -size*15/100, 5);
+    ofDrawCircle(-size/10 + eye_offset, -size*15/100, size/20);
+    ofDrawCircle(size/10 + eye_offset, -size*15/100, size/20);
     
 //    エフェクトは座標変換2の影響を受けて欲しくないのでその分戻す（かつzindex前に表示されて欲しい)
     ofRotateZDeg(-(character_angle_offset + character_angle_acceleration_offset));
@@ -261,7 +264,7 @@ void GamePlayer::tweenEnd(int &e) {
         life_count = u_red_value = 0.;
     }else if (e == 41) {
         //地面にめり込む
-        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 100, -200, 500, 0);
+        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 100, -size*2, 500, 0);
     }else if(e == 42) {
         revival();
     }else if(e == 51) {

@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
-float Ground_radius = 1000.0;
-float Player_size = 100;
+float Ground_radius = 2000.0;
+float Player_size = 200;
 float mX = -999;  //-1 ~ 1
 int frame_count;
 

@@ -43,7 +43,7 @@ void Ground::startAnimation (string state) {
     string filename = "imgs/logo" + to_string(random) + ".png";
     logo.load(filename);
     
-    tweenGround.setParameters(1, ease_circ, ofxTween::easeOut, 0, -radius*0.7, 3000, 2000);
+    tweenGround.setParameters(1, ease_circ, ofxTween::easeOut, 0, -radius, 3000, 2000);
     tweenlogoAlpha.setParameters(3, ease_circ, ofxTween::easeOut, 0, 255, 1000, 3000);
     
     logo_size_amount = -100;
@@ -52,7 +52,7 @@ void Ground::startAnimation (string state) {
     if(state == "clear") {
         for (int i = 0; i < 100; i ++ ) {
             Paper paper;
-            paper.init(10);
+            paper.init(20);
             papers.push_back(paper);
         }
     }
@@ -76,7 +76,7 @@ void Ground::display () {
 void Ground::tweenEnd(int &e) {
     if(e == 1) {
         //戻る
-        tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius*0.7, 0, 3000, 3500);
+        tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius, 0, 3000, 3500);
     }else if (e == 2) {
         y_offset = 0;
         papers.clear();

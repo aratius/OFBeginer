@@ -67,7 +67,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
             key_pos = 1.5;
             key_speed *= -1.3;
         }
-        angle = key_pos * PI / degree;  //case key
+        angle = key_pos * PI / degree * position_angleAmount;  //case key
         
         //勢いつけて移動した時に前傾姿勢になる
         key_offset += key_speed * 30;

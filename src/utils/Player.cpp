@@ -5,6 +5,7 @@
 // 90番台 : 復活演出3,4共通
 // 50番台 : ダメージ演出
 // 60番台 : 回復演出
+// 70番台 : ジャンプ
 
 #include "Player.hpp"
 
@@ -33,6 +34,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenJump.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenEmpty.end_E, this, &GamePlayer::tweenEnd);
     
     ofEnableAlphaBlending();
@@ -61,8 +63,8 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
         hokuyo_x /= 50;
         angle = hokuyo_x * PI / degree;  //case hokuyo
     }else if(input == "key") {
-        key_pos += key_speed;
-        key_speed *= 0.96;
+        key_pos += sin(key_speed);
+        key_speed *= 0.95;
         if(key_pos < -key_pos_bounce) {
             key_pos = -key_pos_bounce;
             key_speed *= -1;
@@ -229,14 +231,13 @@ void GamePlayer::display() {
     
 }
 
-
-
 //tweenを一括で実行する関数
 void GamePlayer::tweenManage(){
     //これでtweenの時間が進行する
     
     tweenUpDown.update();
-    bounce_offset = tweenUpDown.getTarget(0);
+    tweenJump.update();
+    bounce_offset = tweenUpDown.getTarget(0) + tweenJump.getTarget(0);
     
     tweenRotationZ.update();
     character_angle_offset = tweenRotationZ.getTarget(0);
@@ -275,6 +276,10 @@ void GamePlayer::tweenEnd(int &e) {
         tweenAngleAmount.setParameters(92, ease_circ, ofxTween::easeOut, 0, 1, 2000, 500);
     }else if(e == 92) {
         life = true;
+    }else if(e == 71) {
+        tweenJump.setParameters(72, ease_bounce, ofxTween::easeOut, 300, 0, 600, 0);
+    }else if(e == 72) {
+        jumpable = true;
     }
 }
 
@@ -284,8 +289,15 @@ string GamePlayer::isLife() {
 
 void GamePlayer::keyPressed(int key) {
     if(key == 57356) {
-        if(key_speed > -0.3) key_speed -= 0.02;
+        if(key_speed > -0.07) key_speed -= 0.02;
     }else if (key == 57358) {
-        if(key_speed < 0.31) key_speed += 0.02;
+        if(key_speed < 0.07) key_speed += 0.02;
+    }else if(key == 57357) {
+        //up
+        //jump
+        if(jumpable) {
+            tweenJump.setParameters(71, ease_circ, ofxTween::easeOut, 0, 300, 400, 0);
+            jumpable = false;
+        }
     }
 }

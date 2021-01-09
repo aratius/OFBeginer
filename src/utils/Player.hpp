@@ -62,6 +62,7 @@ public:
     
     bool life = true;  //生きてるか死んでるか
     bool angleFrag = true;  //trueの時はtweenの値を参照しない
+    bool jumpable = true;
     
     float key_pos = 0;
     float key_speed = 0;
@@ -75,6 +76,7 @@ public:
     RecoveryEffects recover_effect;
     
     ofxTween tweenUpDown;  //中心からのdistのOffsetを扱う ジャンプとか昇天とか全部これ
+    ofxTween tweenJump;  //ジャンプ
     ofxTween tweenRotationZ;  //キャラクターの回転はこれ
     ofxTween tweenRotationY;
     //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。

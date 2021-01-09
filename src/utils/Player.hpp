@@ -65,6 +65,7 @@ public:
     
     float key_pos = 0;
     float key_speed = 0;
+    float key_offset = 0;
     
     ofShader playerShader;
     ofImage playerImage;

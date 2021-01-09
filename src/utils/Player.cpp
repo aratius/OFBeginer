@@ -41,6 +41,12 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     float angle;
     if(input == "mouse") {
         angle = mX * PI / degree * position_angleAmount;  //case mouse
+        
+        //勢いつけて移動した時に前傾姿勢になる
+        mouse_offset *= 0.95;
+        mouse_offset += mouseSpeed * 30;
+        character_angle_acceleration_offset = mouse_offset;
+        eye_offset = mouse_offset;
     }else if(input == "hokuyo") {
         if(hokuyo_x > -360 && hokuyo_x < 360 && !(hokuyo_x > -0.5 && hokuyo_x < 0.5)) {
             last_active_pos = hokuyo_x;
@@ -61,8 +67,13 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
             key_pos = 1.5;
             key_speed *= -1.3;
         }
-        cout << key_speed <<endl;
         angle = key_pos * PI / degree;  //case key
+        
+        //勢いつけて移動した時に前傾姿勢になる
+        key_offset += key_speed * 30;
+        key_offset *= 0.95;
+        character_angle_acceleration_offset = key_offset;
+        eye_offset = key_offset;
     }
     float dist = g_r + bounce_offset;
     
@@ -92,11 +103,6 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
     }
     
     u_noiseAmount *= 0.99;
-    //勢いつけて移動した時に前傾姿勢になる
-    mouse_offset *= 0.95;
-    mouse_offset += mouseSpeed * 30;
-    character_angle_acceleration_offset = mouse_offset;
-    eye_offset = mouse_offset;
     
     //[tween].update()を一括で実行する関数
     tweenManage();
@@ -277,6 +283,6 @@ void GamePlayer::keyPressed(int key) {
     if(key == 57356) {
         if(key_speed > -0.3) key_speed -= 0.02;
     }else if (key == 57358) {
-        if(key_speed < 0.3) key_speed += 0.02;
+        if(key_speed < 0.31) key_speed += 0.02;
     }
 }

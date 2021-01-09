@@ -37,7 +37,7 @@ public:
     void keyPressed(int key);
     
     float xPos, yPos, size;
-    float footSize = 20;
+    float footSize = 40;
     float eye_offset = 0;
     float u_noiseAmount = 0.;
     

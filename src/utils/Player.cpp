@@ -30,7 +30,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     //foot
     foot.init(0, size/2, footSize, size);
     //recover effect
-    recover_effect.init(500, 30, size, 20);
+    recover_effect.init(500, 60, size, 20);
     
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
@@ -154,7 +154,7 @@ void GamePlayer::injury() {
 void GamePlayer::clear() {
     state = "clear";
     float duration = 600;
-    tweenUpDown.setParameters(31, ease_circ, ofxTween::easeOut, 0, 300, duration*2, 0);  //ジャンプ
+    tweenUpDown.setParameters(31, ease_circ, ofxTween::easeOut, 0, 600, duration*2, 0);  //ジャンプ
     tweenRotationY.setParameters(0, ease_circ, ofxTween::easeOut, 0,  720*2, 2000, 0);
     angleFrag = false;  //falseにすることで
     tweenAngleAmount.setParameters(0, ease_circ, ofxTween::easeOut, 1, 0, 2000, 0);
@@ -165,7 +165,7 @@ void GamePlayer::dead() {
     state = "dead";
     float duration = 600;
     //setParametersを呼ぶことでTween開始
-    tweenUpDown.setParameters(41, ease_circ, ofxTween::easeOut, 0, 100, duration, 0);  //ジャンプ
+    tweenUpDown.setParameters(41, ease_circ, ofxTween::easeOut, 0, 200, duration, 0);  //ジャンプ
     tweenRotationZ.setParameters(0, ease_elastic, ofxTween::easeOut, 0,  720, 1000, 0);  //ジャンプ中回転
     
 }
@@ -257,7 +257,7 @@ void GamePlayer::tweenManage(){
 void GamePlayer::tweenEnd(int &e) {
     if(e == 31) {
         //かっこよく着地
-        tweenUpDown.setParameters(32, ease_bounce, ofxTween::easeOut, 300, 0, 500, 0);
+        tweenUpDown.setParameters(32, ease_bounce, ofxTween::easeOut, 600, 0, 500, 0);
     }else if(e == 32) {
         revival_clear();
         tweenEmpty.setParameters(33, ease_bounce, ofxTween::easeOut, 0, 0, 2000, 0);
@@ -265,7 +265,7 @@ void GamePlayer::tweenEnd(int &e) {
         life_count = u_red_value = 0.;
     }else if (e == 41) {
         //地面にめり込む
-        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 100, -size*2, 500, 0);
+        tweenUpDown.setParameters(42, ease_bounce, ofxTween::easeOut, 200, -size*2, 500, 0);
     }else if(e == 42) {
         revival();
     }else if(e == 51) {

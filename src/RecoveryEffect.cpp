@@ -13,7 +13,7 @@ void RecoveryEffect::init(float _duration, float _parent_size) {
     parent_size = _parent_size;
     xPos = (ofRandom(1.0)-0.5) * parent_size;
     yPos = parent_size/2;  //地面の位置
-    speed = ofRandom(3)+0.1;
+    speed = ofRandom(5)+0.1;
     size_offset = -ofRandom(10);
     
     texture.load("imgs/effects/p_recovery.png");

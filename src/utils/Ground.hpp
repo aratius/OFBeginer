@@ -29,6 +29,7 @@ public:
     float y_offset = 0;
     float logo_alpha = 0;
     float logo_size_amount = 0;
+    bool paper_display = false;
     
     ofImage logo;
     

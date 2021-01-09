@@ -10,6 +10,11 @@ void Ground::init(float _radius, float _y) {
     ofAddListener(tweenlogoSize.end_E, this, &Ground::tweenEnd);
     
     
+    for (int i = 0; i < 100; i ++ ) {
+        Paper paper;
+        paper.init(20);
+        papers.push_back(paper);
+    }
 }
 
 void Ground::update() {
@@ -42,11 +47,9 @@ void Ground::startAnimation (string state) {
     tweenlogoSize.setParameters(5, ease_elastic, ofxTween::easeOut, -100, 100, 1000, 3000);
     
     if(state == "clear") {
-        for (int i = 0; i < 100; i ++ ) {
-            Paper paper;
-            paper.init(20);
-            papers.push_back(paper);
-        }
+        paper_display = true;
+    }else {
+        paper_display =false;
     }
 }
 
@@ -59,9 +62,13 @@ void Ground::display () {
     float w = ofGetWidth() * 0.8 + logo_size_amount;
     float h = w * 0.7 + logo_size_amount;
     logo.draw(ofGetWidth()/2 - w/2, ofGetHeight()/2 - h/2, w, h);
-    
+
     for (int i = 0; i < papers.size(); i++) {
-        papers[i].display(logo_alpha);
+        if(paper_display) {
+            papers[i].display(logo_alpha);
+        }else {
+            papers[i].display(0);
+        }
     }
 }
 

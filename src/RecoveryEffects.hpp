@@ -27,7 +27,6 @@ class RecoveryEffects {
         int num;
         float size, max_size, duration, parent_size;
         
-        ofImage texture;
         vector<RecoveryEffect> effects;
     
         ofxTween sizeTween;

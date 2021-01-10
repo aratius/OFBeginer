@@ -26,7 +26,8 @@ void ofApp::setup(){
     float initY = -(cos(initAngle) * Ground_radius + Player_size) + getGround_yPos();
     player.init(ofGetWidth()/2, initY, Player_size);
     
-    hokuyo.init();
+//    hokuyo.init();
+    osc.init();
     injury_effect.init(Player_size);
     
     buildings.init(Ground_radius, getGround_yPos());
@@ -49,8 +50,10 @@ void ofApp::update(){
     
     //cirlcleとplayerの衝突判定
     string role = checkCollision();
-    float hokuyo_x = hokuyo.update();
-    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, role, mouseSpeed);
+//    float hokuyo_x = hokuyo.update();
+    float hokuyo_x;
+    ofVec3f osc_value = osc.update();
+    player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, osc_value, role, mouseSpeed);
     
     if(setTimer(60) && player.life) {
         //60フレームに1度実行される

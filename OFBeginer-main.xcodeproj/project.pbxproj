@@ -27,6 +27,7 @@
 		6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26C4A6254126C99F0A65354 /* ofxEasingElastic.cpp */; };
 		704B825C25A57B2A00721CFA /* Paper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704B825A25A57B2A00721CFA /* Paper.cpp */; };
 		704B825F25A5F7A400721CFA /* Buildings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704B825D25A5F7A400721CFA /* Buildings.cpp */; };
+		704B826225AB12DA00721CFA /* OscReciever.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704B826025AB12D900721CFA /* OscReciever.cpp */; };
 		70D95CF625A303940059DDF2 /* Sky.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF425A303940059DDF2 /* Sky.cpp */; };
 		70D95CF925A438820059DDF2 /* RecoveryEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */; };
 		70D95CFC25A448260059DDF2 /* RecoveryEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D95CFA25A448260059DDF2 /* RecoveryEffects.cpp */; };
@@ -128,6 +129,8 @@
 		704B825B25A57B2A00721CFA /* Paper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Paper.hpp; sourceTree = "<group>"; };
 		704B825D25A5F7A400721CFA /* Buildings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buildings.cpp; sourceTree = "<group>"; };
 		704B825E25A5F7A400721CFA /* Buildings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Buildings.hpp; sourceTree = "<group>"; };
+		704B826025AB12D900721CFA /* OscReciever.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscReciever.cpp; sourceTree = "<group>"; };
+		704B826125AB12DA00721CFA /* OscReciever.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OscReciever.hpp; sourceTree = "<group>"; };
 		70D95CF425A303940059DDF2 /* Sky.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sky.cpp; sourceTree = "<group>"; };
 		70D95CF525A303940059DDF2 /* Sky.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sky.hpp; sourceTree = "<group>"; };
 		70D95CF725A438810059DDF2 /* RecoveryEffect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RecoveryEffect.cpp; sourceTree = "<group>"; };
@@ -511,6 +514,8 @@
 				E989CD8046629CF1C075696F /* PlayerFoot.hpp */,
 				00E6E80FFDC9B0F56F6A06E7 /* Hokuyo.cpp */,
 				759CC408369A62F575D1BBC3 /* Hokuyo.hpp */,
+				704B826025AB12D900721CFA /* OscReciever.cpp */,
+				704B826125AB12DA00721CFA /* OscReciever.hpp */,
 				E416323DB1093AA4736886DA /* Circle.cpp */,
 				74FFE5F7840B36AFAFDD540E /* Circle.hpp */,
 				6D6EF7A7FAD616C08383793F /* Ground.cpp */,
@@ -1169,6 +1174,7 @@
 				9266028E1AECBB027ABF64D8 /* ofxEasing.cpp in Sources */,
 				5E0DBDE5736DEB3A5886B3F1 /* ofxEasingBack.cpp in Sources */,
 				EAD3CE0789481F975F351F39 /* ofxEasingBounce.cpp in Sources */,
+				704B826225AB12DA00721CFA /* OscReciever.cpp in Sources */,
 				27765D1BFF26BD9A6186915F /* ofxEasingCirc.cpp in Sources */,
 				704B825C25A57B2A00721CFA /* Paper.cpp in Sources */,
 				E816D7D242D315FB53E23F54 /* ofxEasingCubic.cpp in Sources */,

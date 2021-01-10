@@ -19,13 +19,22 @@ float HokuyoOsc::update() {
         while (receiver.hasWaitingMessages()) {
             ofxOscMessage m;
             receiver.getNextMessage(m);
-            if (m.getAddress() == "/hokuyo/x") {
+//            if (m.getAddress() == "/hokuyo/x") {
+//                if(m.getArgAsFloat(0) != -999) {
+//                    hokuyo_x = m.getArgAsFloat(0);
+//                }
+//            }
+            cout << m << endl;
+            if (m.getAddress() == "/button/right") {
                 if(m.getArgAsFloat(0) != -999) {
-                    hokuyo_x = m.getArgAsFloat(0);
+                    hokuyo_x = m.getArgAsInt(0);
                 }
+            }else if(m.getAddress() == "/button/left") {
+//                if()
+                hokuyo_x = -m.getArgAsInt(0);
             }
+//            cout << hokuyo_x << endl;
             
         }
-    
     return hokuyo_x;
 }

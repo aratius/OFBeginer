@@ -12,7 +12,7 @@
 #define degree 10 
 //#define degree 4
 
-#define input "key"
+#define input "osc"
 #define key_pos_bounce 2.0
 
 #define angle_offset_devide 60
@@ -40,7 +40,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     ofEnableAlphaBlending();
 }
 
-void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string role, float mouseSpeed) {
+void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f osc_value, string role, float mouseSpeed) {
     
     
     float angle;
@@ -63,6 +63,43 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, string 
         hokuyo_x /= 50;
         angle = hokuyo_x * PI / degree;  //case hokuyo
     }else if(input == "key") {
+        key_pos += sin(key_speed);
+        key_speed *= 0.95;
+        if(key_pos < -key_pos_bounce) {
+            key_pos = -key_pos_bounce;
+            key_speed *= -1;
+        }else if (key_pos > key_pos_bounce){
+            key_pos = key_pos_bounce;
+            key_speed *= -1;
+        }
+        angle = key_pos * PI / degree * position_angleAmount;  //case key
+        
+        //勢いつけて移動した時に前傾姿勢になる
+        key_offset += key_speed * angle_offset_devide;
+        key_offset *= 0.95;
+        character_angle_acceleration_offset = key_offset;
+        eye_offset = key_offset;
+    }else if (input == "osc") {
+        if(osc_value.x == 1) {
+            osc_direction = -1;
+        }else if (osc_value.y == 1) {
+            osc_direction = 1;
+        }
+        if(osc_value.x == 1 && osc_value.y == 1 || (osc_value.x == 0 && osc_value.y == 0)){
+            osc_direction = 0;
+        }
+        if(osc_value.z == 1) {
+            if(jumpable) {
+                tweenJump.setParameters(71, ease_circ, ofxTween::easeOut, 0, 300, 400, 0);
+                jumpable = false;
+            };
+        }
+        
+        if(osc_direction == 1) {
+            if(key_speed > -0.07) key_speed -= 0.01;
+        }else if(osc_direction == -1) {
+            if(key_speed < 0.07) key_speed += 0.01;
+        }
         key_pos += sin(key_speed);
         key_speed *= 0.95;
         if(key_pos < -key_pos_bounce) {

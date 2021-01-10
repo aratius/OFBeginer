@@ -21,7 +21,7 @@ class GamePlayer {
 public:
     
     void init(float _x, float _y, float _size);
-    void update(float mX, float g_r, float g_y, float hokuyo_x, string role, float mousesSpeed);
+    void update(float mX, float g_r, float g_y, float hokuyo_x, ofVec3f osc_value, string role, float mousesSpeed);
     void display();
     void recovery();
     void injury();
@@ -37,7 +37,7 @@ public:
     void keyPressed(int key);
     
     float xPos, yPos, size;
-    float footSize = 40;
+    float footSize = 20;
     float eye_offset = 0;
     float u_noiseAmount = 0.;
     
@@ -67,6 +67,7 @@ public:
     float key_pos = 0;
     float key_speed = 0;
     float key_offset = 0;
+    float osc_direction = 0;  //-1左 1右
     
     ofShader playerShader;
     ofImage playerImage;

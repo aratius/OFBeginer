@@ -8,6 +8,7 @@
 #include "Sky.hpp"
 #include "InjuryEffects.hpp"
 #include "Buildings.hpp"
+#include "OscReciever.hpp"
 
 //addons
 #include "ofxOsc.h"
@@ -34,6 +35,7 @@ class ofApp : public ofBaseApp{
         Ground ground;
         GamePlayer player;
         HokuyoOsc hokuyo;
+        OscReciever osc;
         Sky sky;
         InjuryEffects injury_effect;  //ダメージエフェクトはプレイヤーではなく文字に依存するのでこっちで呼び出し
         Buildings buildings;

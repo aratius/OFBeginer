@@ -1,4 +1,4 @@
-# ASIIB Game
+# INFECTABLE WORDS
 
 学校の授業で、openframeworksで作ったゲームです。
 

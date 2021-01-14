@@ -9,7 +9,6 @@
 
 void OscReciever::init() {
     receiver.setup(PORT);
-    cout << "/osc" << endl;
 }
 
 ofVec3f OscReciever::update() {

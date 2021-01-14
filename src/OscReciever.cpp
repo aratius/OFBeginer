@@ -27,6 +27,5 @@ ofVec3f OscReciever::update() {
             buttonState.z = m.getArgAsFloat(0);
         }
     }
-    cout << "/" << buttonState.x << endl;
     return buttonState;
 }

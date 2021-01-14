@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
-float Ground_radius = 2000.0;
-float Player_size = 200;
+float Ground_radius = 1000.0;
+float Player_size = 100;
 float mX = -999;  //-1 ~ 1
 int frame_count;
 
@@ -32,8 +32,10 @@ void ofApp::setup(){
     
     buildings.init(Ground_radius, getGround_yPos());
     
-//    bg_music.load("se/gamesound.mp3");
-//    bg_music.play();
+    bg_music.load("se/gamesound.mp3");
+    bg_music.setVolume(0.2);
+    bg_music.setLoop(true);
+    bg_music.play();
     
 }
 

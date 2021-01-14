@@ -28,6 +28,12 @@ void GamePlayer::init(float _x, float _y, float _size) {
     noiseTexture.load("imgs/noise.png");
     playerShader.load("","shaders/player.frag");
     
+    se_recovery.load("se/recovery.mp3");
+    se_injury.load("se/injury.mp3");
+    se_clear.load("se/clear.mp3");
+    se_gameover.load("se/gameover.mp3");
+    se_revival.load("se/up.mp3");
+    
     //foot
     foot.init(0, size/2, footSize, size);
     //recover effect
@@ -37,6 +43,7 @@ void GamePlayer::init(float _x, float _y, float _size) {
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenJump.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenEmpty.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenEmpty2.end_E, this, &GamePlayer::tweenEnd);
     
     ofEnableAlphaBlending();
 }
@@ -136,6 +143,7 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f
 
 //回復
 void GamePlayer::recovery(){
+    se_recovery.play();
     recover_effect.effectStart();
     
     u_noiseAmount = 0.;
@@ -153,6 +161,7 @@ void GamePlayer::recovery(){
 
 //負傷
 void GamePlayer::injury() {
+    se_injury.play();
     
     //ダメージ
     u_noiseAmount = 2.;
@@ -182,6 +191,7 @@ void GamePlayer::clear() {
 
 //死（ゲームオーバー）
 void GamePlayer::dead() {
+    se_gameover.play();
     state = "dead";
     float duration = 600;
     //setParametersを呼ぶことでTween開始
@@ -196,6 +206,7 @@ void GamePlayer::revival() {
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
     angleFrag = true;
+    tweenEmpty2.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, -size*2, ofGetHeight()*0.4, 5000, 7000);
 }
 //クリアからの復活時(各種パラメータのイニシャライズも）
@@ -203,6 +214,7 @@ void GamePlayer::revival_clear() {
     state = "playing";
     position_angleAmount = 0;
     angleFrag = true;
+    tweenEmpty2.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, 0, ofGetHeight()*0.4, 5000, 7000);
 }
 
@@ -272,6 +284,7 @@ void GamePlayer::tweenManage(){
     character_angle_y = tweenRotationY.getTarget(0);
     
     tweenEmpty.update();
+    tweenEmpty2.update();
 }
 
 void GamePlayer::tweenEnd(int &e) {
@@ -280,8 +293,10 @@ void GamePlayer::tweenEnd(int &e) {
         tweenUpDown.setParameters(32, ease_bounce, ofxTween::easeOut, 600, 0, 500, 0);
     }else if(e == 32) {
         revival_clear();
+        //groundにplayerが隠れたくらいのタイミングで実行するやつ
         tweenEmpty.setParameters(33, ease_bounce, ofxTween::easeOut, 0, 0, 2000, 0);
     }else if(e == 33) {
+        se_clear.play();
         life_count = u_red_value = 0.;
     }else if (e == 41) {
         //地面にめり込む
@@ -296,6 +311,8 @@ void GamePlayer::tweenEnd(int &e) {
         tweenAngleAmount.setParameters(92, ease_circ, ofxTween::easeOut, 0, 1, 2000, 500);
     }else if(e == 92) {
         life = true;
+    }else if(e == 95) {
+        se_revival.play();
     }else if(e == 71) {
         tweenJump.setParameters(72, ease_bounce, ofxTween::easeOut, 300, 0, 600, 0);
     }else if(e == 72) {

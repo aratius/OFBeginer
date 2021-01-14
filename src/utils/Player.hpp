@@ -84,6 +84,7 @@ public:
     ofxTween tweenAngleAmount;
     //tweenの機能は持たず、n秒後に処理を実行するために利用する
     ofxTween tweenEmpty;
+    ofxTween tweenEmpty2;  //復活時の神々しい声を再生するまでのディレイ
     
     //イージングを余分にいっぱい羅列している
     ofxEasingBounce ease_bounce;
@@ -92,6 +93,12 @@ public:
     ofxEasingCirc ease_circ;
     ofxEasingElastic ease_elastic;
     ofxEasingBack ease_back;
+    
+    ofSoundPlayer se_recovery;
+    ofSoundPlayer se_injury;
+    ofSoundPlayer se_clear;
+    ofSoundPlayer se_gameover;
+    ofSoundPlayer se_revival;
 private:
     
 };

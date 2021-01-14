@@ -42,8 +42,9 @@ void GamePlayer::init(float _x, float _y, float _size) {
     ofAddListener(tweenUpDown.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenAngleAmount.end_E, this, &GamePlayer::tweenEnd);
     ofAddListener(tweenJump.end_E, this, &GamePlayer::tweenEnd);
-    ofAddListener(tweenEmpty.end_E, this, &GamePlayer::tweenEnd);
-    ofAddListener(tweenEmpty2.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenEmptyPlayerColor.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenEmptyChorus.end_E, this, &GamePlayer::tweenEnd);
+    ofAddListener(tweenEmptyJump.end_E, this, &GamePlayer::tweenEnd);
     
     ofEnableAlphaBlending();
 }
@@ -98,7 +99,13 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f
             key_pos = key_pos_bounce;
             key_speed *= -1;
         }
-        angle = key_pos * PI / degree * position_angleAmount;  //case key
+        if(!position_angle_fixed) {
+            angle = key_pos * PI / degree * position_angleAmount;  //case key
+            position_angle_fixed_value = angle;  //記憶しておく
+        }else {
+            angle = position_angle_fixed_value;
+        }
+        
         
         //勢いつけて移動した時に前傾姿勢になる
         key_offset += key_speed * angle_offset_devide;
@@ -194,6 +201,7 @@ void GamePlayer::dead() {
     se_gameover.play();
     state = "dead";
     float duration = 600;
+    position_angle_fixed = true;
     //setParametersを呼ぶことでTween開始
     tweenUpDown.setParameters(41, ease_circ, ofxTween::easeOut, 0, 200, duration, 0);  //ジャンプ
     tweenRotationZ.setParameters(0, ease_elastic, ofxTween::easeOut, 0,  720, 1000, 0);  //ジャンプ中回転
@@ -205,8 +213,9 @@ void GamePlayer::revival() {
     state = "playing";
     life_count = u_red_value = 0.;
     position_angleAmount = 0;
+    position_angle_fixed = false;
     angleFrag = true;
-    tweenEmpty2.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
+    tweenEmptyChorus.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, -size*2, ofGetHeight()*0.4, 5000, 7000);
 }
 //クリアからの復活時(各種パラメータのイニシャライズも）
@@ -214,7 +223,7 @@ void GamePlayer::revival_clear() {
     state = "playing";
     position_angleAmount = 0;
     angleFrag = true;
-    tweenEmpty2.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
+    tweenEmptyChorus.setParameters(95, ease_bounce, ofxTween::easeOut, 0, 0, 7000, 0);
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, 0, ofGetHeight()*0.4, 5000, 7000);
 }
 
@@ -283,8 +292,9 @@ void GamePlayer::tweenManage(){
     tweenRotationY.update();
     character_angle_y = tweenRotationY.getTarget(0);
     
-    tweenEmpty.update();
-    tweenEmpty2.update();
+    tweenEmptyPlayerColor.update();
+    tweenEmptyChorus.update();
+    tweenEmptyJump.update();
 }
 
 void GamePlayer::tweenEnd(int &e) {
@@ -294,7 +304,7 @@ void GamePlayer::tweenEnd(int &e) {
     }else if(e == 32) {
         revival_clear();
         //groundにplayerが隠れたくらいのタイミングで実行するやつ
-        tweenEmpty.setParameters(33, ease_bounce, ofxTween::easeOut, 0, 0, 2000, 0);
+        tweenEmptyPlayerColor.setParameters(33, ease_bounce, ofxTween::easeOut, 0, 0, 2000, 0);
     }else if(e == 33) {
         se_clear.play();
         life_count = u_red_value = 0.;
@@ -314,7 +324,8 @@ void GamePlayer::tweenEnd(int &e) {
     }else if(e == 95) {
         se_revival.play();
     }else if(e == 71) {
-        tweenJump.setParameters(72, ease_bounce, ofxTween::easeOut, 300, 0, 600, 0);
+        tweenJump.setParameters(0, ease_bounce, ofxTween::easeOut, 300, 0, 400, 0);
+        tweenEmptyJump.setParameters(72, ease_bounce, ofxTween::easeOut, 0, 0, 200, 0);
     }else if(e == 72) {
         jumpable = true;
     }

@@ -59,6 +59,8 @@ public:
     float mouse_offset = 0;  //マウスの加速度 マイフレーム*= 0.99とかで徐々に減ってく
     
     float position_angleAmount = 1;  //曲座標から算出するGround中心から見た角度
+    bool position_angle_fixed = false;
+    float position_angle_fixed_value = 0;
     
     bool life = true;  //生きてるか死んでるか
     bool angleFrag = true;  //trueの時はtweenの値を参照しない
@@ -82,9 +84,11 @@ public:
     ofxTween tweenRotationY;
     //ゲーム中以外にキャラクターを中央に固定するために、大元のangleに掛ける値。0なら固定。
     ofxTween tweenAngleAmount;
-    //tweenの機能は持たず、n秒後に処理を実行するために利用する
-    ofxTween tweenEmpty;
-    ofxTween tweenEmpty2;  //復活時の神々しい声を再生するまでのディレイ
+    
+    //tweenEmpty = tweenの機能は持たず、n秒後に処理を実行するために利用する
+    ofxTween tweenEmptyPlayerColor;
+    ofxTween tweenEmptyChorus;  //復活時の神々しい声を再生するまでのディレイ
+    ofxTween tweenEmptyJump;
     
     //イージングを余分にいっぱい羅列している
     ofxEasingBounce ease_bounce;

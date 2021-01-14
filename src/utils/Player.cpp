@@ -12,8 +12,9 @@
 #define degree 10 
 //#define degree 4
 
-#define input "osc"
+#define input_type "osc"
 #define key_pos_bounce 2.0
+#define key_max_speed 0.04
 
 #define angle_offset_devide 60
 
@@ -42,17 +43,8 @@ void GamePlayer::init(float _x, float _y, float _size) {
 
 void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f osc_value, string role, float mouseSpeed) {
     
-    
     float angle;
-    if(input == "mouse") {
-        angle = mX * PI / degree * position_angleAmount;  //case mouse
-        
-        //勢いつけて移動した時に前傾姿勢になる
-        mouse_offset *= 0.95;
-        mouse_offset += mouseSpeed * angle_offset_devide;
-        character_angle_acceleration_offset = mouse_offset;
-        eye_offset = mouse_offset;
-    }else if(input == "hokuyo") {
+    if(input_type == "hokuyo") {
         if(hokuyo_x > -360 && hokuyo_x < 360 && !(hokuyo_x > -0.5 && hokuyo_x < 0.5)) {
             last_active_pos = hokuyo_x;
         }else {
@@ -62,46 +54,36 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f
         //だいたい-1~1の値に調整（ここは手動で）
         hokuyo_x /= 50;
         angle = hokuyo_x * PI / degree;  //case hokuyo
-    }else if(input == "key") {
-        key_pos += sin(key_speed);
-        key_speed *= 0.95;
-        if(key_pos < -key_pos_bounce) {
-            key_pos = -key_pos_bounce;
-            key_speed *= -1;
-        }else if (key_pos > key_pos_bounce){
-            key_pos = key_pos_bounce;
-            key_speed *= -1;
-        }
-        angle = key_pos * PI / degree * position_angleAmount;  //case key
+    }else if (input_type == "osc") {
         
-        //勢いつけて移動した時に前傾姿勢になる
-        key_offset += key_speed * angle_offset_devide;
-        key_offset *= 0.95;
-        character_angle_acceleration_offset = key_offset;
-        eye_offset = key_offset;
-    }else if (input == "osc") {
-        if(osc_value.x == 1) {
-            osc_direction = -1;
-        }else if (osc_value.y == 1) {
-            osc_direction = 1;
+        if(!(osc_value.x == -999 && osc_value.y == -999 && osc_value.z == -999)){
+            
+            if(osc_value.x == 0 || osc_value.y == 0) {
+                osc_direction = 0;
+            }
+            if(osc_value.x == 1) {
+                osc_direction = -1;
+            }else if (osc_value.y == 1) {
+                osc_direction = 1;
+            }
+            
+            if(osc_value.z == 1) {
+                if(jumpable) {
+                    tweenJump.setParameters(71, ease_circ, ofxTween::easeOut, 0, 300, 400, 0);
+                    jumpable = false;
+                };
+            }
         }
-        if(osc_value.x == 1 && osc_value.y == 1 || (osc_value.x == 0 && osc_value.y == 0)){
-            osc_direction = 0;
-        }
-        if(osc_value.z == 1) {
-            if(jumpable) {
-                tweenJump.setParameters(71, ease_circ, ofxTween::easeOut, 0, 300, 400, 0);
-                jumpable = false;
-            };
-        }
+        
         
         if(osc_direction == 1) {
-            if(key_speed > -0.07) key_speed -= 0.01;
+            if(key_speed > -key_max_speed) key_speed -= 0.01;
         }else if(osc_direction == -1) {
-            if(key_speed < 0.07) key_speed += 0.01;
+            if(key_speed < key_max_speed) key_speed += 0.01;
         }
         key_pos += sin(key_speed);
-        key_speed *= 0.95;
+        key_speed *= 0.95;  //ほっとくと0になる
+        //端っこに行ったときにバウンド
         if(key_pos < -key_pos_bounce) {
             key_pos = -key_pos_bounce;
             key_speed *= -1;
@@ -188,6 +170,7 @@ void GamePlayer::injury() {
     }
 }
 
+//クリア
 void GamePlayer::clear() {
     state = "clear";
     float duration = 600;
@@ -207,7 +190,7 @@ void GamePlayer::dead() {
     
 }
 
-//復活時(各種パラメータのイニシャライズも）
+//死からの復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival() {
     state = "playing";
     life_count = u_red_value = 0.;
@@ -215,7 +198,7 @@ void GamePlayer::revival() {
     angleFrag = true;
     tweenUpDown.setParameters(91, ease_circ, ofxTween::easeOut, -size*2, ofGetHeight()*0.4, 5000, 7000);
 }
-//復活時(各種パラメータのイニシャライズも）
+//クリアからの復活時(各種パラメータのイニシャライズも）
 void GamePlayer::revival_clear() {
     state = "playing";
     position_angleAmount = 0;
@@ -326,11 +309,10 @@ string GamePlayer::isLife() {
 
 void GamePlayer::keyPressed(int key) {
     if(key == 57356) {
-        if(key_speed > -0.07) key_speed -= 0.02;
+        if(key_speed > -key_max_speed) key_speed -= 0.01;
     }else if (key == 57358) {
-        if(key_speed < 0.07) key_speed += 0.02;
+        if(key_speed < key_max_speed) key_speed += 0.01;
     }else if(key == 57357) {
-        //up
         //jump
         if(jumpable) {
             tweenJump.setParameters(71, ease_circ, ofxTween::easeOut, 0, 300, 400, 0);

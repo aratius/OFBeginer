@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-#define PORT 8000
+#define PORT 10000
 
 class OscReciever {
 public:

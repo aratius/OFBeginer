@@ -9,7 +9,6 @@ void Ground::init(float _radius, float _y) {
     ofAddListener(tweenlogoAlpha.end_E, this, &Ground::tweenEnd);
     ofAddListener(tweenlogoSize.end_E, this, &Ground::tweenEnd);
     
-    
     for (int i = 0; i < 100; i ++ ) {
         Paper paper;
         paper.init(20);
@@ -19,7 +18,6 @@ void Ground::init(float _radius, float _y) {
 
 void Ground::update() {
     tweenGround.update();
-    
     y_offset = tweenGround.getTarget(0);
     
     tweenlogoAlpha.update();
@@ -48,7 +46,7 @@ void Ground::startAnimation (string state) {
     if(state == "clear") {
         paper_display = true;
     }else {
-        paper_display =false;
+        paper_display = false;
     }
 }
 
@@ -58,10 +56,10 @@ void Ground::display () {
     ofDrawCircle(ofGetWidth()/2, yPos + y_offset, radius);  //Ground (big)
     
     ofSetColor(255, 255, 255, logo_alpha);
-    float w = ofGetWidth() * 0.8 + logo_size_amount;
-    float h = w * 0.7 + logo_size_amount;
+    float w = ofGetWidth() * 0.65 + logo_size_amount;
+    float h = w * 0.5 + logo_size_amount;
     logo.draw(ofGetWidth()/2 - w/2, ofGetHeight()/2 - h/2, w, h);
-
+ 
     for (int i = 0; i < papers.size(); i++) {
         if(paper_display) {
             papers[i].display(logo_alpha);

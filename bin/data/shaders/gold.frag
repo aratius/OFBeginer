@@ -8,9 +8,9 @@ void main() {
   vec4 color = texture2DRect(tex0, pos);
 
 //gold
-  color.r = 255./255.;
-  color.g = 215./255.;
-  color.b = 0.;
+  color.r = 60./255.;
+  color.g = 229./255.;
+  color.b = 168./225.;
   
   gl_FragColor = color;
 }

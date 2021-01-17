@@ -144,12 +144,12 @@ void ofApp::circleInit() {
         //good
         int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";
-        circle.init(x, -100, Player_size, ofRandom(2) + 2, frame_count, filename, "good");
+        circle.init(x, -100, Player_size, ofRandom(6) + 2, frame_count, filename, "good");
     }else{
         //bad
         int index = ofRandom(1, 37);
         string filename = "imgs/bad/bad-" + to_string(index) + ".png";
-        circle.init(x, -100, Player_size, ofRandom(2) + 2, frame_count, filename, "bad");
+        circle.init(x, -100, Player_size, ofRandom(6) + 2, frame_count, filename, "bad");
     }
     
     circles.push_back(circle);  //配列に追加

@@ -10,13 +10,12 @@
 #define amplitude 30
 #define frame_devide 1
 
-void Circle::init (float _x, float _y, int _eSize, float _speed, float frame, string filename, string _role) {
+void Circle::init (float _x, float _y, int _eSize, float _speed, string filename, string _role) {
     
     xPos = _x;
     yPos = _y;
     eSize = _eSize;
     speed = _speed;
-    start_frame = frame;
     offsetX = 0;
     angleValue = (ofRandom(1)-0.5) * speed;
     angle = ofRandom(1) * 360;
@@ -29,8 +28,8 @@ void Circle::init (float _x, float _y, int _eSize, float _speed, float frame, st
     goldShader.load("", "shaders/gold.frag");
 }
 
-void Circle::update() {
-    float frame = ofGetElapsedTimef();
+void Circle::update(int frame_count) {
+    float frame = frame_count / 50.0;
     
     offsetX = (sin(frame * seed[0] * frame_devide) - sin(frame * seed[1] * frame_devide)) * amplitude;
     

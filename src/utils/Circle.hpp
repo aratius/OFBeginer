@@ -15,8 +15,8 @@ class Circle {
     
 public:
     
-    void init(float _x, float _y, int _eSize, float _speed, float frame, string filename, string _role);
-    void update();
+    void init(float _x, float _y, int _eSize, float _speed, string filename, string _role);
+    void update(int frame_count);
     void display();
     
     float xPos, yPos, eSize, speed, start_frame, offsetX, angleValue, angle;

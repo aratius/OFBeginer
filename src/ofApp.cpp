@@ -3,7 +3,6 @@
 float Ground_radius = 1000.0;
 float Player_size = 100;
 float mX = -999;  //-1 ~ 1
-int frame_count;
 
 //地面の大きいCircleのY座標を取得
 float ofApp::getGround_yPos(){
@@ -44,7 +43,7 @@ void ofApp::update(){
     sky.update();
     
     for(int i = 0; i < circles.size(); i++) {
-        circles[i].update();
+        circles[i].update(frame_count);
         if(circles[i].yPos > ofGetHeight()) {
             circles.erase(circles.begin()+i);//要素削除
         }
@@ -62,7 +61,6 @@ void ofApp::update(){
         circleInit();
     };
     
-    frame_count ++;
 
     injury_effect.update();
     
@@ -72,10 +70,11 @@ void ofApp::update(){
     }else if (player.isLife() == "playing" && !isPlaying) {
         isPlaying = true;
     }
-    ground.update();
+    ground.update(frame_count);
     
     buildings.update();
     
+    frame_count ++;
 }
 
 //circleとplayerの衝突 衝突したら該当のcircle消す
@@ -110,7 +109,7 @@ void ofApp::draw(){
 //    ofDrawCircle(player.xPos + player.size/2, player.yPos + player.size/2, Player_size/2+10);
     
     sky.display();
-    buildings.display();
+    buildings.display(frame_count);
     
     for(int i = 0; i < circles.size(); i ++){
         circles[i].display();
@@ -144,12 +143,12 @@ void ofApp::circleInit() {
         //good
         int index = ofRandom(1, 11);
         string filename = "imgs/good/good-" + to_string(index) + ".png";
-        circle.init(x, -100, Player_size, ofRandom(6) + 2, frame_count, filename, "good");
+        circle.init(x, -100, Player_size, ofRandom(6) + 2, filename, "good");
     }else{
         //bad
         int index = ofRandom(1, 37);
         string filename = "imgs/bad/bad-" + to_string(index) + ".png";
-        circle.init(x, -100, Player_size, ofRandom(6) + 2, frame_count, filename, "bad");
+        circle.init(x, -100, Player_size, ofRandom(6) + 2, filename, "bad");
     }
     
     circles.push_back(circle);  //配列に追加

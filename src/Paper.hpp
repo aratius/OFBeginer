@@ -14,7 +14,7 @@
 class Paper {
 public:
     void init(float _size);
-    void update();
+    void update(int frame_count);
     void display(float alpha);
     
     float xPos, yPos, size, x_offset, seed, frame;

@@ -47,6 +47,7 @@ class ofApp : public ofBaseApp{
         float lastMousePos;
         bool isPlaying = true;
         float ground_offset = 0;
+        int frame_count;
     
         
 };

@@ -28,17 +28,16 @@ void Paper::init(float _size) {
     frame = 0;
 }
 
-void Paper::update() {
+void Paper::update(int frame_count) {
+    float frame = frame_count / 50.0;
     
-    x_offset = sin(ofGetElapsedTimef() * seed) * 30;
+    x_offset = sin(frame * seed) * 30;
     yPos += seed;
     if(yPos > ofGetHeight() + size) {
         yPos = 0 - size;
     }
     
-    rotation = ofVec3f(ofGetElapsedTimef() * seed_rotarion.x, ofGetElapsedTimef() * seed_rotarion.y, ofGetElapsedTimef() * seed_rotarion.z);
-    
-    
+    rotation = ofVec3f(frame * seed_rotarion.x, frame * seed_rotarion.y, frame * seed_rotarion.z);
     
 }
 

@@ -16,7 +16,7 @@ void Ground::init(float _radius, float _y) {
     }
 }
 
-void Ground::update() {
+void Ground::update(int frame_count) {
     tweenGround.update();
     y_offset = tweenGround.getTarget(0);
     
@@ -27,7 +27,7 @@ void Ground::update() {
     logo_size_amount = tweenlogoSize.getTarget(0);
 
     for (int i = 0; i < papers.size(); i++) {
-        papers[i].update();
+        papers[i].update(frame_count);
     }
 
 }
@@ -57,7 +57,7 @@ void Ground::display () {
     
     ofSetColor(255, 255, 255, logo_alpha);
     float w = ofGetWidth() * 0.65 + logo_size_amount;
-    float h = w * 0.5 + logo_size_amount;
+    float h = w * 0.35  + logo_size_amount;
     logo.draw(ofGetWidth()/2 - w/2, ofGetHeight()/2 - h/2, w, h);
  
     for (int i = 0; i < papers.size(); i++) {
@@ -75,7 +75,6 @@ void Ground::tweenEnd(int &e) {
         tweenGround.setParameters(2, ease_circ, ofxTween::easeOut, -radius, 0, 3000, 3500);
     }else if (e == 2) {
         y_offset = 0;
-        papers.clear();
     }else if (e == 3) {
         tweenlogoAlpha.setParameters(4, ease_circ, ofxTween::easeIn, 255, 0, 1000, 3300);
     }

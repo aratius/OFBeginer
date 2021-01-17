@@ -15,7 +15,7 @@ class Buildings {
 public:
     void init(float _size, float _yPos);
     void update();
-    void display();
+    void display(int frame_count);
     
     float size;
     float yPos;

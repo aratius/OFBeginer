@@ -21,7 +21,7 @@ public:
     
     void init(float _radius, float _y);
     void display();
-    void update();
+    void update(int frame_count);
     void startAnimation(string state);
     void tweenEnd(int &e);
     

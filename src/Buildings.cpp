@@ -34,14 +34,15 @@ void Buildings::init(float _size, float _yPos) {
 void Buildings::update() {
 }
 
-void Buildings::display() {
+void Buildings::display(int frame_count) {
+    float frame = frame_count/50.0;
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, yPos);
     
     //奥
     ofSetColor(255, 255, 255);
-    ofRotateZDeg(ofGetElapsedTimef() * bg_2_speed_devide);
+    ofRotateZDeg(frame * bg_2_speed_devide);
 
     transparentShader.begin();
     transparentShader.setUniform1f("u_alpha", bg_2_alpha);
@@ -50,7 +51,7 @@ void Buildings::display() {
 
     //真ん中
     ofSetColor(255, 255, 255);
-    ofRotateZDeg(ofGetElapsedTimef() * bg_1_speed_devide);
+    ofRotateZDeg(frame * bg_1_speed_devide);
 
     transparentShader.begin();
     transparentShader.setUniform1f("u_alpha", bg_1_alpha);
@@ -59,7 +60,7 @@ void Buildings::display() {
     
     //手前
     ofSetColor(255, 255, 255);
-    ofRotateZDeg(ofGetElapsedTimef() * bg_3_speed_devide);
+    ofRotateZDeg(frame * bg_3_speed_devide);
     
     transparentShader.begin();
     transparentShader.setUniform1f("u_alpha", bg_3_alpha);

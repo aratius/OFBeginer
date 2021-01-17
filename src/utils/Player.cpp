@@ -144,7 +144,6 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f
     
     //[tween].update()を一括で実行する関数
     tweenManage();
-    
 }
 
 
@@ -198,8 +197,8 @@ void GamePlayer::clear() {
 
 //死（ゲームオーバー）
 void GamePlayer::dead() {
-    se_gameover.play();
     state = "dead";
+    se_gameover.play();
     float duration = 600;
     position_angle_fixed = true;
     //setParametersを呼ぶことでTween開始

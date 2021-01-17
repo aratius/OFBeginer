@@ -57,7 +57,7 @@ void ofApp::update(){
     ofVec3f osc_value = osc.update();
     player.update(mX, Ground_radius, getGround_yPos(), hokuyo_x, osc_value, role, mouseSpeed);
     
-    if(setTimer(60) && player.life) {
+    if(setTimer(50) && player.life) {
         //60フレームに1度実行される
         circleInit();
     };
@@ -67,7 +67,6 @@ void ofApp::update(){
     injury_effect.update();
     
     if(player.isLife() != "playing" && isPlaying) {
-        cout << player.isLife() << endl;
         isPlaying = false;
         ground.startAnimation(player.isLife());
     }else if (player.isLife() == "playing" && !isPlaying) {
@@ -125,7 +124,7 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y){
     float mousePositionX = ofGetMouseX();
     float stageWidth = ofGetWidth();
     mX = (mousePositionX / stageWidth - 0.5) * 2;  //-1 ~ 1

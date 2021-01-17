@@ -77,9 +77,9 @@ void GamePlayer::update(float mX,  float g_r, float g_y, float hokuyo_x, ofVec3f
         
         
         if(osc_direction == 1) {
-            if(key_speed > -key_max_speed) key_speed -= 0.01;
+            if(key_speed > -key_max_speed) key_speed -= 0.005;
         }else if(osc_direction == -1) {
-            if(key_speed < key_max_speed) key_speed += 0.01;
+            if(key_speed < key_max_speed) key_speed += 0.005;
         }
         key_pos += sin(key_speed);
         key_speed *= 0.95;  //ほっとくと0になる
@@ -309,9 +309,9 @@ string GamePlayer::isLife() {
 
 void GamePlayer::keyPressed(int key) {
     if(key == 57356) {
-        if(key_speed > -key_max_speed) key_speed -= 0.01;
+        if(key_speed > -key_max_speed) key_speed -= 0.005;
     }else if (key == 57358) {
-        if(key_speed < key_max_speed) key_speed += 0.01;
+        if(key_speed < key_max_speed) key_speed += 0.005;
     }else if(key == 57357) {
         //jump
         if(jumpable) {
